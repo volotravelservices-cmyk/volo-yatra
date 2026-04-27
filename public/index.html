@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Volo Yatra — Business Suite</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--nv:#0f2744;--nv2:#1a3a5c;--nv3:#2563a8;--gd:#d4951a;--gd2:#f0b830;--cr:#faf8f4;--cr2:#f3f0e8;--bd:rgba(15,39,68,.1);--tx:#1a1f2e;--tx2:#4a5568;--tx3:#8a9ab0;--wh:#fff;--ok:#166534;--okb:#dcfce7;--er:#991b1b;--erb:#fee2e2;--wn:#92400e;--wnb:#fef3c7;--in:#1e40af;--inb:#dbeafe;--sb:240px;--hh:56px;--r:10px}
+html,body{height:100%;overflow:hidden;font-family:"DM Sans",sans-serif;background:var(--cr);color:var(--tx);font-size:14px}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:rgba(15,39,68,.15);border-radius:4px}
+.lw{display:flex;align-items:center;justify-content:center;height:100vh;background:linear-gradient(135deg,var(--nv),var(--nv2))}
+.lb{background:#fff;border-radius:20px;padding:40px;width:100%;max-width:400px;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.li{width:56px;height:56px;background:var(--gd);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;margin:0 auto 12px}
+.lf{margin:14px 0}.lf label{display:block;font-size:12px;font-weight:500;color:var(--tx2);margin-bottom:5px}
+.lf input{width:100%;padding:11px 14px;border:1px solid var(--bd);border-radius:9px;font-size:14px;font-family:"DM Sans",sans-serif;outline:none}
+.lf input:focus{border-color:var(--nv3);box-shadow:0 0 0 3px rgba(37,99,168,.08)}
+.lb2{width:100%;padding:12px;background:var(--nv);color:#fff;border:none;border-radius:9px;font-size:15px;font-weight:600;cursor:pointer;font-family:"DM Sans",sans-serif;margin-top:4px}
+.lb2:hover{background:var(--nv2)}
+.le{background:var(--erb);color:var(--er);padding:10px 14px;border-radius:8px;font-size:13px;margin-bottom:14px;display:none}
+.app{display:flex;height:100vh;overflow:hidden}
+.sb{width:var(--sb);background:var(--nv);display:flex;flex-direction:column;flex-shrink:0;overflow-y:auto}
+.sbl{padding:16px;border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:10px}
+.sbi{width:34px;height:34px;background:var(--gd);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.sbt{font-family:"Fraunces",serif;font-size:16px;font-weight:700;color:#fff}
+.ng{padding:8px 10px 0}
+.ngl{font-size:9px;font-weight:700;color:rgba(255,255,255,.28);letter-spacing:1.3px;text-transform:uppercase;padding:10px 8px 3px}
+.ni{display:flex;align-items:center;gap:9px;padding:7px 10px;border-radius:8px;cursor:pointer;color:rgba(255,255,255,.58);font-size:13px;transition:all .15s;margin:1px 0}
+.ni:hover{background:rgba(255,255,255,.07);color:rgba(255,255,255,.9)}
+.ni.active{background:rgba(212,149,26,.18);color:#f0b830}
+.nii{font-size:14px;width:18px;text-align:center;flex-shrink:0}
+.sbf{margin-top:auto;padding:12px;border-top:1px solid rgba(255,255,255,.06)}
+.ur{display:flex;align-items:center;gap:9px;padding:8px;border-radius:8px}
+.ua{width:30px;height:30px;border-radius:50%;background:var(--gd);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--nv);flex-shrink:0}
+.un{font-size:12px;font-weight:500;color:rgba(255,255,255,.85)}
+.uro{font-size:10px;color:rgba(255,255,255,.38)}
+.uout{margin-left:auto;font-size:11px;color:rgba(255,255,255,.3);cursor:pointer;padding:4px 6px;border-radius:4px}
+.uout:hover{color:rgba(255,255,255,.7);background:rgba(255,255,255,.08)}
+.sbo{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:250;display:none}
+.sbo.open{display:block}
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
+.tb{height:var(--hh);background:#fff;border-bottom:1px solid var(--bd);display:flex;align-items:center;padding:0 18px;gap:10px;flex-shrink:0;box-shadow:0 1px 3px rgba(0,0,0,.07)}
+.tbt{font-family:"Fraunces",serif;font-size:17px;font-weight:700;color:var(--nv)}
+.tbs{flex:1}
+.mbt{display:none;cursor:pointer;padding:5px;border-radius:6px;font-size:18px;color:var(--tx2)}
+.cnt{flex:1;overflow-y:auto;padding:18px}
+.pg{display:none;animation:pgI .18s ease}.pg.active{display:block}
+@keyframes pgI{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.pgh{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px;gap:10px;flex-wrap:wrap}
+.pgt{font-family:"Fraunces",serif;font-size:21px;font-weight:700;color:var(--nv)}
+.pgs{font-size:12px;color:var(--tx3);margin-top:2px}
+.pga{display:flex;gap:7px;flex-wrap:wrap}
+.btn{padding:7px 14px;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;border:1px solid var(--bd);background:#fff;color:var(--tx);transition:all .15s;font-family:"DM Sans",sans-serif;display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+.btn:hover{background:var(--cr2)}.btn:disabled{opacity:.5;cursor:not-allowed}
+.btnp{background:var(--nv);color:#fff;border-color:var(--nv)}.btnp:hover{background:var(--nv2)}
+.btng{background:var(--gd);color:var(--nv);border-color:var(--gd);font-weight:600}.btng:hover{background:var(--gd2)}
+.btns{padding:4px 10px;font-size:11px}
+.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:18px}
+.st{background:#fff;border:1px solid var(--bd);border-radius:var(--r);padding:14px 16px;box-shadow:0 1px 3px rgba(0,0,0,.07)}
+.st.ac{border-left:3px solid var(--gd)}
+.slb{font-size:11px;color:var(--tx3);font-weight:500;text-transform:uppercase;letter-spacing:.6px;margin-bottom:5px}
+.svl{font-family:"Fraunces",serif;font-size:24px;font-weight:700;color:var(--nv);line-height:1}
+.ssb{font-size:11px;color:var(--tx3);margin-top:4px}
+.tup{color:var(--ok);font-size:11px;margin-top:3px}
+.twn{color:var(--wn);font-size:11px;margin-top:3px}
+.card{background:#fff;border:1px solid var(--bd);border-radius:var(--r);box-shadow:0 1px 3px rgba(0,0,0,.07);overflow:hidden;margin-bottom:14px}
+.ch{padding:13px 16px;border-bottom:1px solid var(--bd);display:flex;align-items:center}
+.ct{font-family:"Fraunces",serif;font-size:14px;font-weight:600;color:var(--nv)}
+.ca{margin-left:auto;display:flex;gap:6px}
+.cb{padding:14px 16px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.tw{overflow-x:auto}
+.tbl{width:100%;border-collapse:collapse;font-size:12.5px}
+.tbl th{text-align:left;padding:8px 13px;font-size:10.5px;font-weight:600;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px;background:var(--cr);border-bottom:1px solid var(--bd);white-space:nowrap}
+.tbl td{padding:10px 13px;border-bottom:1px solid rgba(0,0,0,.04);color:var(--tx2);vertical-align:middle}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr:hover td{background:rgba(15,39,68,.018)}
+.tid{font-weight:600;color:var(--nv);font-size:12px}
+.pill{display:inline-flex;align-items:center;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600;white-space:nowrap}
+.ps{background:var(--okb);color:var(--ok)}.pd{background:var(--erb);color:var(--er)}.pw{background:var(--wnb);color:var(--wn)}.pi{background:var(--inb);color:var(--in)}.pg2{background:var(--cr2);color:var(--tx2)}
+.tabs{display:flex;border-bottom:1px solid var(--bd);margin-bottom:16px;overflow-x:auto}
+.tab{padding:10px 14px;font-size:12.5px;font-weight:500;color:var(--tx3);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;transition:all .15s}
+.tab:hover{color:var(--tx)}.tab.active{color:var(--nv);border-bottom-color:var(--nv);font-weight:600}
+.fg{display:flex;flex-direction:column;gap:4px;margin-bottom:12px}
+.fg label{font-size:12px;font-weight:500;color:var(--tx2)}
+.fg input,.fg select,.fg textarea{padding:8px 11px;border:1px solid var(--bd);border-radius:8px;font-size:13px;color:var(--tx);background:#fff;font-family:"DM Sans",sans-serif;outline:none;transition:border-color .15s;width:100%}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--nv3);box-shadow:0 0 0 3px rgba(37,99,168,.07)}
+.fg textarea{resize:vertical;min-height:70px}
+.fg2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.lr{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid rgba(0,0,0,.05);font-size:13px}
+.lr:last-child{border-bottom:none}
+.dr{color:var(--er);font-weight:600}.cr{color:var(--ok);font-weight:600}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:500;display:none;align-items:center;justify-content:center;padding:16px}
+.ov.open{display:flex}
+.modal{background:#fff;border-radius:16px;width:100%;max-width:580px;max-height:92vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.mh{padding:18px 22px 14px;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:#fff;z-index:5;border-radius:16px 16px 0 0}
+.mt{font-family:"Fraunces",serif;font-size:17px;font-weight:700;color:var(--nv)}
+.mc{cursor:pointer;width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--tx3);font-size:16px}
+.mc:hover{background:var(--cr2)}
+.mb{padding:18px 22px}
+.mf{padding:14px 22px;border-top:1px solid var(--bd);display:flex;justify-content:flex-end;gap:7px;position:sticky;bottom:0;background:#fff;border-radius:0 0 16px 16px}
+.tw2{position:fixed;bottom:18px;right:18px;z-index:1000;display:flex;flex-direction:column;gap:7px}
+.toast{background:var(--nv);color:#fff;padding:11px 16px;border-radius:10px;font-size:13px;font-weight:500;box-shadow:0 4px 14px rgba(0,0,0,.1);animation:tI .3s ease,tO .3s ease 2.7s forwards;display:flex;align-items:center;gap:8px;min-width:200px}
+.toast.ok{background:#166534}.toast.er{background:var(--er)}.toast.wn{background:#92400e}
+@keyframes tI{from{transform:translateY(16px);opacity:0}to{opacity:1}}@keyframes tO{to{opacity:0;transform:translateY(8px)}}
+.spn{width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite;display:inline-block}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ib{background:var(--inb);border:1px solid rgba(30,64,175,.2);border-radius:8px;padding:11px 14px;font-size:13px;color:var(--in);display:flex;gap:9px;margin-bottom:14px}
+.wb{background:var(--wnb);border:1px solid rgba(146,64,14,.2);border-radius:8px;padding:11px 14px;font-size:13px;color:var(--wn);display:flex;gap:9px;margin-bottom:14px}
+.prog{height:4px;background:var(--cr2);border-radius:3px;overflow:hidden;margin-top:4px}
+.pf{height:100%;border-radius:3px;transition:width .5s}
+.pipe{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.pc{min-width:130px}
+.ph{font-size:10px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.7px;padding:7px 9px;background:var(--cr2);border-radius:7px;margin-bottom:7px;display:flex;justify-content:space-between}
+.lc{background:#fff;border:1px solid var(--bd);border-radius:9px;padding:11px;margin-bottom:7px;cursor:pointer;transition:all .18s;box-shadow:0 1px 3px rgba(0,0,0,.07)}
+.lc:hover{border-color:var(--gd);transform:translateY(-1px)}
+.lc-n{font-weight:600;font-size:13px;margin-bottom:2px}
+.lc-s{font-size:11px;color:var(--tx3)}
+.lc-v{font-size:13px;font-weight:700;color:var(--gd);margin-top:5px}
+.dz{border:2px dashed var(--bd);border-radius:10px;padding:24px;text-align:center;cursor:pointer;transition:all .2s;background:var(--cr)}
+.dz:hover{border-color:var(--nv3)}
+.jl{display:grid;grid-template-columns:1fr 110px 1fr 110px 28px;gap:6px;margin-bottom:6px;align-items:center}
+.jl input{padding:7px 9px;border:1px solid var(--bd);border-radius:7px;font-size:12px;font-family:"DM Sans",sans-serif;outline:none;width:100%}
+.jl input:focus{border-color:var(--nv3)}
+.jd{background:var(--erb);color:var(--er);border:none;border-radius:6px;cursor:pointer;font-size:16px;width:28px;height:28px;display:flex;align-items:center;justify-content:center}
+.lo{padding:9px 14px;font-size:13px;cursor:pointer;border-bottom:1px solid var(--bd)}
+.lo:hover{background:var(--cr)}.lo.sel{background:var(--inb);color:var(--in);font-weight:600}
+.lg{padding:5px 10px;font-size:10px;font-weight:700;color:var(--tx3);text-transform:uppercase;background:var(--cr);letter-spacing:.5px}
+.wr{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid rgba(0,0,0,.05)}
+.wr:last-child{border-bottom:none}
+@media(max-width:768px){.sb{position:fixed;left:0;top:0;bottom:0;z-index:300;transform:translateX(-100%)}.sb.open{transform:translateX(0)}.mbt{display:flex}.g2,.g3,.fg2,.fg3{grid-template-columns:1fr}.sg{grid-template-columns:1fr 1fr}.cnt{padding:12px}.pipe{grid-template-columns:1fr 1fr}.jl{grid-template-columns:1fr 90px 1fr 90px 28px}}
+@media(max-width:480px){.sg{grid-template-columns:1fr}.pipe{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div id="lp" class="lw">
+  <div class="lb">
+    <div class="li">✈</div>
+    <div style="font-family:'Fraunces',serif;font-size:26px;font-weight:700;color:var(--nv);text-align:center">Volo Yatra</div>
+    <div style="text-align:center;color:var(--tx3);font-size:13px;margin:4px 0 20px">Business Suite</div>
+    <div class="le" id="le"></div>
+    <div class="lf"><label>Email</label><input type="email" id="lem" value="admin@voloyatra.in"></div>
+    <div class="lf"><label>Password</label><input type="password" id="lpw" value="Admin@123"></div>
+    <button class="lb2" id="lbtn" onclick="doLogin()">Sign In →</button>
+    <div style="font-size:12px;color:var(--tx3);text-align:center;margin-top:12px">admin@voloyatra.in / Admin@123</div>
+  </div>
+</div>
+
+<div id="app" class="app" style="display:none">
+<div class="sbo" id="sbo" onclick="closeSB()"></div>
+<nav class="sb" id="sb">
+  <div class="sbl"><div class="sbi">✈</div><div><div class="sbt">Volo Yatra</div><div style="font-size:10px;color:rgba(255,255,255,.35)">Business Suite v3</div></div></div>
+  <div class="ng">
+    <div class="ngl">Overview</div>
+    <div class="ni active" onclick="nav('dash',this)"><span class="nii">⊞</span>Dashboard</div>
+  </div>
+  <div class="ng">
+    <div class="ngl">Services</div>
+    <div class="ni" onclick="nav('air',this)"><span class="nii">✈</span>Air Ticketing</div>
+    <div class="ni" onclick="nav('hotel',this)"><span class="nii">🏨</span>Hotel Booking</div>
+    <div class="ni" onclick="nav('train',this)"><span class="nii">🚆</span>Train Ticketing</div>
+    <div class="ni" onclick="nav('visa',this)"><span class="nii">📋</span>Visa Services</div>
+    <div class="ni" onclick="nav('tour',this)"><span class="nii">🗺️</span>Tour Packages</div>
+    <div class="ni" onclick="nav('taxi',this)"><span class="nii">🚗</span>Taxi / Bus</div>
+  </div>
+  <div class="ng">
+    <div class="ngl">Finance</div>
+    <div class="ni" onclick="nav('inv',this)"><span class="nii">🧾</span>Invoicing</div>
+    <div class="ni" onclick="nav('acc',this)"><span class="nii">📊</span>Accounting</div>
+    <div class="ni" onclick="nav('bnk',this)"><span class="nii">🏦</span>Banking &amp; Cash</div>
+  </div>
+  <div class="ng">
+    <div class="ngl">Growth</div>
+    <div class="ni" onclick="nav('crm',this)"><span class="nii">👥</span>CRM &amp; Leads</div>
+    <div class="ni" onclick="nav('mkt',this)"><span class="nii">📢</span>Marketing</div>
+    <div class="ni" onclick="nav('anl',this)"><span class="nii">📈</span>Analytics</div>
+  </div>
+  <div class="ng">
+    <div class="ngl">System</div>
+    <div class="ni" onclick="nav('imp',this)"><span class="nii">⬆️</span>Import Data</div>
+    <div class="ni" onclick="nav('set',this)"><span class="nii">⚙️</span>Settings</div>
+  </div>
+  <div class="sbf">
+    <div class="ur">
+      <div class="ua" id="ua">RS</div>
+      <div><div class="un" id="un">—</div><div class="uro" id="uro">—</div></div>
+      <div class="uout" onclick="doLogout()" title="Sign out">↩</div>
+    </div>
+  </div>
+</nav>
+<div class="main">
+  <div class="tb">
+    <div class="mbt" onclick="toggleSB()">☰</div>
+    <div class="tbt" id="pgt">Dashboard</div>
+    <div class="tbs"></div>
+    <button class="btn btng" onclick="openM('bk')">+ New Booking</button>
+  </div>
+  <div class="cnt">
+
+<!-- DASHBOARD -->
+<div class="pg active" id="p-dash">
+  <div class="pgh"><div><div class="pgt" id="dg">Dashboard</div><div class="pgs" id="dd"></div></div><div class="pga"><button class="btn btng" onclick="openM('bk')">+ New Booking</button></div></div>
+  <div class="sg">
+    <div class="st ac"><div class="slb">Monthly Revenue</div><div class="svl" id="d-r">—</div><div class="tup">This month</div></div>
+    <div class="st"><div class="slb">Active Bookings</div><div class="svl" id="d-b">—</div></div>
+    <div class="st"><div class="slb">Pending Invoices</div><div class="svl" id="d-i">—</div><div class="twn" id="d-ic"></div></div>
+    <div class="st"><div class="slb">Open Leads</div><div class="svl" id="d-l">—</div></div>
+  </div>
+  <div class="g2">
+    <div class="card"><div class="ch"><div class="ct">Recent Bookings</div></div>
+      <div class="tw"><table class="tbl"><thead><tr><th>Ref</th><th>Party</th><th>Service</th><th>Amount</th><th>Status</th></tr></thead>
+      <tbody id="d-bt"><tr><td colspan="5" style="text-align:center;color:var(--tx3);padding:20px">Loading...</td></tr></tbody></table></div>
+    </div>
+    <div class="card"><div class="ch"><div class="ct">Revenue by Service</div></div><div class="cb" id="d-sp"><div style="text-align:center;color:var(--tx3);padding:20px">Loading...</div></div></div>
+  </div>
+</div>
+
+<!-- BOOKINGS (shared for all services) -->
+<div class="pg" id="p-bk">
+  <div class="pgh"><div><div class="pgt" id="bk-h">Bookings</div><div class="pgs">All bookings · Real-time</div></div>
+    <div class="pga"><button class="btn btnp" onclick="openM('bk')">+ New Booking</button></div></div>
+  <div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap">
+    <input id="bks" style="flex:1;min-width:160px;padding:8px 11px;border:1px solid var(--bd);border-radius:8px;font-size:13px;font-family:'DM Sans',sans-serif;outline:none" placeholder="🔍 Party, PNR, booking ID..." oninput="loadBk()">
+    <select id="bkst" onchange="loadBk()" style="padding:8px 11px;border:1px solid var(--bd);border-radius:8px;font-size:13px;font-family:'DM Sans',sans-serif;background:#fff"><option value="">All Status</option><option>confirmed</option><option>pending</option><option>processing</option><option>cancelled</option></select>
+  </div>
+  <div class="card"><div class="tw"><table class="tbl" id="bkt">
+    <thead><tr><th>Booking ID</th><th>Party</th><th>Route</th><th>Travel Date</th><th>Pax</th><th>Amount</th><th>Status</th><th>Action</th></tr></thead>
+    <tbody><tr><td colspan="8" style="text-align:center;color:var(--tx3);padding:24px">Loading...</td></tr></tbody>
+  </table></div></div>
+</div>
+
+<!-- INVOICING -->
+<div class="pg" id="p-inv">
+  <div class="pgh"><div><div class="pgt">🧾 Invoicing</div><div class="pgs">GST-compliant · Auto journal entry</div></div>
+    <div class="pga"><button class="btn btnp" onclick="openM('inv')">+ Generate Invoice</button></div></div>
+  <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap">
+    <input id="invs" placeholder="🔍 Invoice no., party..." oninput="loadInv()" style="flex:1;min-width:160px;padding:8px 11px;border:1px solid var(--bd);border-radius:8px;font-size:13px;font-family:'DM Sans',sans-serif;outline:none">
+    <select id="invst" onchange="loadInv()" style="padding:8px 11px;border:1px solid var(--bd);border-radius:8px;font-size:13px;font-family:'DM Sans',sans-serif;background:#fff"><option value="">All</option><option>unpaid</option><option>paid</option><option>overdue</option></select>
+  </div>
+  <div class="card"><div class="tw"><table class="tbl" id="invt">
+    <thead><tr><th>Invoice No.</th><th>Party</th><th>Date</th><th>Gross Fare</th><th>Taxable</th><th>GST</th><th>Total</th><th>Status</th><th>Action</th></tr></thead>
+    <tbody><tr><td colspan="9" style="text-align:center;color:var(--tx3);padding:24px">Loading...</td></tr></tbody>
+  </table></div></div>
+</div>
+
+<!-- ACCOUNTING -->
+<div class="pg" id="p-acc">
+  <div class="pgh"><div><div class="pgt">📊 Accounting</div><div class="pgs">Journal · Ageing · GST · Party Ledger Download</div></div>
+    <div class="pga"><button class="btn btnp" onclick="openM('je')">+ Journal Entry</button></div></div>
+  <div class="sg">
+    <div class="st ac"><div class="slb">Revenue YTD</div><div class="svl" id="ac-r">—</div></div>
+    <div class="st"><div class="slb">Debtors Outstanding</div><div class="svl" id="ac-d">—</div></div>
+    <div class="st"><div class="slb">GST Liability</div><div class="svl" id="ac-g">—</div><div class="twn">Due 20th</div></div>
+  </div>
+  <div class="tabs">
+    <div class="tab active" onclick="acTab(this,'at-je')">Journal Entries</div>
+    <div class="tab" onclick="acTab(this,'at-age')">Ageing / Party Ledger</div>
+    <div class="tab" onclick="acTab(this,'at-gst')">GST Summary</div>
+    <div class="tab" onclick="acTab(this,'at-pl')">P&amp;L</div>
+  </div>
+  <div id="at-je">
+    <div class="card"><div class="ch"><div class="ct">Journal Entries</div><div class="ca"><button class="btn btns btnp" onclick="openM('je')">+ Entry</button></div></div>
+    <div class="tw"><table class="tbl"><thead><tr><th>Entry No.</th><th>Date</th><th>Narration</th><th>Type</th></tr></thead><tbody id="jet"><tr><td colspan="4" style="text-align:center;color:var(--tx3);padding:20px">Loading...</td></tr></tbody></table></div></div>
+  </div>
+  <div id="at-age" style="display:none">
+    <div class="card"><div class="ch"><div class="ct">Debtor Ageing &amp; Party Ledger</div></div>
+    <div class="tw"><table class="tbl"><thead><tr><th>Party</th><th>0-30 Days</th><th>31-60 Days</th><th>60+ Days</th><th>Total</th><th>Download Ledger</th></tr></thead><tbody id="aget"><tr><td colspan="6" style="text-align:center;color:var(--tx3);padding:20px">Loading...</td></tr></tbody></table></div></div>
+  </div>
+  <div id="at-gst" style="display:none">
+    <div class="card"><div class="ch"><div class="ct">GST Summary — Current Month</div></div>
+    <div class="tw"><table class="tbl"><thead><tr><th>Service</th><th>Taxable</th><th>CGST</th><th>SGST</th><th>IGST</th><th>Total GST</th></tr></thead><tbody id="gstt"><tr><td colspan="6" style="text-align:center;color:var(--tx3);padding:20px">Loading...</td></tr></tbody></table></div></div>
+  </div>
+  <div id="at-pl" style="display:none">
+    <div class="card"><div class="ch"><div class="ct">P&amp;L — Current Year</div></div><div class="cb"><div class="g2">
+      <div>
+        <div style="font-size:11px;font-weight:700;color:var(--nv);text-transform:uppercase;margin-bottom:10px;padding-bottom:5px;border-bottom:1px solid var(--bd)">Income</div>
+        <div class="lr"><span>Air Ticketing Revenue</span><span class="cr">—</span></div>
+        <div class="lr"><span>Hotel Revenue</span><span class="cr">—</span></div>
+        <div class="lr"><span>Tour Package Revenue</span><span class="cr">—</span></div>
+        <div class="lr"><span>Visa Revenue</span><span class="cr">—</span></div>
+        <div class="lr" style="font-weight:700"><span>Total Revenue</span><span class="cr" id="pl-t">₹—</span></div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;color:var(--nv);text-transform:uppercase;margin-bottom:10px;padding-bottom:5px;border-bottom:1px solid var(--bd)">Expenditure</div>
+        <div class="lr"><span>Purchases</span><span>—</span></div>
+        <div class="lr"><span>Salaries</span><span>—</span></div>
+        <div class="lr"><span>Office Expenses</span><span>—</span></div>
+        <div class="lr" style="font-weight:700"><span>Net Profit</span><span class="cr" id="pl-n">₹—</span></div>
+      </div>
+    </div></div></div>
+  </div>
+</div>
+
+<!-- BANKING -->
+<div class="pg" id="p-bnk">
+  <div class="pgh"><div><div class="pgt">🏦 Banking &amp; Cash</div><div class="pgs">PDF upload → Select ledger → Post · Portal wallets · Cash accounts</div></div>
+    <div class="pga"><button class="btn" onclick="openM('addba')">+ Add Account</button><button class="btn btng" onclick="showUpP()">⬆ Upload Statement</button></div></div>
+  <div class="sg" id="bacc"></div>
+  <div class="card" style="margin-bottom:14px">
+    <div class="ch"><div class="ct">💼 Portal Wallets</div><div class="ca"><button class="btn btns" onclick="loadWals()">🔄 Refresh</button></div></div>
+    <div id="walr"><div style="padding:14px;text-align:center;color:var(--tx3);font-size:13px">Loading...</div></div>
+  </div>
+  <div id="upan" style="display:none;margin-bottom:14px">
+    <div class="card"><div class="ch"><div class="ct">📄 Upload Bank Statement PDF</div><div class="ca"><button class="btn btns" onclick="hideUpP()">✕</button></div></div>
+      <div class="cb">
+        <div class="ib"><span>ℹ</span><div>Supports <strong>HDFC · ICICI · SBI · Axis · Kotak</strong> text-based PDFs. Transactions extracted automatically.</div></div>
+        <div class="fg2" style="margin-bottom:12px">
+          <div class="fg"><label>Bank Account</label><select id="upbi" style="padding:8px 11px;border:1px solid var(--bd);border-radius:8px;font-size:13px;font-family:'DM Sans',sans-serif;background:#fff;width:100%"><option value="">Select account</option></select></div>
+          <div class="fg"><label>Bank Ledger Name</label><select id="upbl" style="padding:8px 11px;border:1px solid var(--bd);border-radius:8px;font-size:13px;font-family:'DM Sans',sans-serif;background:#fff;width:100%"><option value="HDFC Bank A/c">HDFC Bank A/c</option><option value="ICICI Bank A/c">ICICI Bank A/c</option><option value="Cash in Hand">Cash in Hand</option></select></div>
+        </div>
+        <div class="dz" id="dz" onclick="document.getElementById('pfi').click()" ondragover="event.preventDefault();this.style.borderColor='var(--nv3)'" ondragleave="this.style.borderColor=''" ondrop="handleDrop(event)">
+          <div style="font-size:32px;margin-bottom:8px">📄</div>
+          <div style="font-size:14px;font-weight:600;color:var(--tx2)">Drop PDF statement here or click to browse</div>
+          <div style="font-size:12px;color:var(--tx3);margin-top:5px">PDF only · Max 20MB</div>
+          <button class="btn btnp" style="margin-top:12px">Browse File</button>
+          <input type="file" id="pfi" accept=".pdf" style="display:none" onchange="handleFS(this)">
+        </div>
+        <div id="uppr" style="display:none;margin-top:10px"><div style="display:flex;align-items:center;gap:10px;padding:11px;background:var(--inb);border-radius:8px;font-size:13px;color:var(--in)"><div class="spn" style="border-top-color:var(--in);border-color:rgba(30,64,175,.2)"></div><span>Parsing PDF...</span></div></div>
+        <div id="uprs" style="display:none;margin-top:10px"></div>
+      </div>
+    </div>
+  </div>
+  <div style="display:flex;gap:8px;margin-bottom:10px;align-items:center;flex-wrap:wrap">
+    <button class="btn" id="bfp" onclick="bkF('pending')" style="background:var(--wnb);color:var(--wn);font-weight:600;border-color:rgba(146,64,14,.2)">⏳ Pending</button>
+    <button class="btn" id="bfpo" onclick="bkF('posted')">✅ Posted</button>
+    <button class="btn" id="bfa" onclick="bkF('all')">All</button>
+    <div style="flex:1"></div>
+    <input id="bks2" placeholder="🔍 Search..." oninput="renderBkT()" style="padding:7px 11px;border:1px solid var(--bd);border-radius:8px;font-size:13px;font-family:'DM Sans',sans-serif;outline:none;min-width:160px">
+    <select id="bkaf" onchange="loadBkT()" style="padding:7px 11px;border:1px solid var(--bd);border-radius:8px;font-size:13px;font-family:'DM Sans',sans-serif;background:#fff"><option value="">All Accounts</option></select>
+  </div>
+  <div id="bb" style="display:none;background:var(--nv);color:#fff;padding:10px 14px;border-radius:8px;margin-bottom:10px;align-items:center;gap:10px;flex-wrap:wrap">
+    <span style="font-size:13px;font-weight:600" id="bc">0 selected</span>
+    <select id="bl" style="flex:1;min-width:180px;padding:6px 10px;border:1px solid rgba(255,255,255,.3);border-radius:6px;font-size:12px;font-family:'DM Sans',sans-serif;background:rgba(255,255,255,.1);color:#fff"><option value="">— Apply ledger to all selected —</option></select>
+    <button class="btn btng" onclick="postAllS()">✅ Post All</button>
+    <button class="btn" onclick="clrS()" style="background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.2)">Clear</button>
+  </div>
+  <div class="card">
+    <div class="ch"><div class="ct" id="bkttl">Transactions — Pending</div><div class="ca"><label style="display:flex;align-items:center;gap:5px;font-size:12px;color:var(--tx2);cursor:pointer"><input type="checkbox" id="sa" onchange="togSA(this)"> Select All</label></div></div>
+    <div class="tw"><table class="tbl" style="min-width:860px">
+      <thead><tr><th style="width:30px"></th><th>Date</th><th>Description</th><th style="text-align:right">Debit</th><th style="text-align:right">Credit</th><th style="text-align:right">Balance</th><th>Ledger</th><th>Status</th><th>Action</th></tr></thead>
+      <tbody id="bkb"><tr><td colspan="9" style="text-align:center;color:var(--tx3);padding:28px">Upload a bank statement to see transactions.</td></tr></tbody>
+    </table></div>
+  </div>
+  <!-- Ledger modal -->
+  <div class="ov" id="ledm" onclick="if(event.target===this)closeLedM()">
+    <div class="modal" onclick="event.stopPropagation()" style="max-width:480px">
+      <div class="mh"><div class="mt">Post to Ledger</div><div class="mc" onclick="closeLedM()">✕</div></div>
+      <div class="mb">
+        <div id="ledmd" style="background:var(--cr);border-radius:8px;padding:12px;margin-bottom:12px;font-size:13px;line-height:1.8"></div>
+        <div class="fg"><label>Search &amp; Select Ledger *</label><input id="ledsrch" placeholder="Type ledger name e.g. Airfare Purchase, Bank Charges..." oninput="filterLed(this.value)" style="padding:9px 12px;border:1px solid var(--bd);border-radius:8px;font-size:13px;width:100%;font-family:'DM Sans',sans-serif;outline:none"></div>
+        <div id="ledl" style="max-height:200px;overflow-y:auto;border:1px solid var(--bd);border-radius:8px;margin-top:-8px;background:#fff"></div>
+        <div class="fg" style="margin-top:10px"><label>Narration (optional)</label><input id="ledn" placeholder="Leave blank to use transaction description" style="padding:8px 11px;border:1px solid var(--bd);border-radius:8px;font-size:13px;width:100%;font-family:'DM Sans',sans-serif;outline:none"></div>
+        <div id="ledb" style="display:none;background:var(--okb);color:var(--ok);padding:9px 13px;border-radius:8px;font-size:13px;font-weight:600;margin-top:6px"></div>
+      </div>
+      <div class="mf"><button class="btn" onclick="closeLedM()">Cancel</button><button class="btn btnp" id="postbtn" onclick="confirmPost()" disabled>✅ Post to Ledger</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- CRM -->
+<div class="pg" id="p-crm">
+  <div class="pgh"><div><div class="pgt">👥 CRM &amp; Leads</div><div class="pgs">Instagram · Facebook · WhatsApp · Walk-in</div></div>
+    <div class="pga"><button class="btn btnp" onclick="openM('lead')">+ Add Lead</button></div></div>
+  <div class="sg">
+    <div class="st ac"><div class="slb">Total Leads</div><div class="svl" id="cr-t">—</div></div>
+    <div class="st"><div class="slb">New</div><div class="svl" id="cr-n">—</div></div>
+    <div class="st"><div class="slb">Converted</div><div class="svl" id="cr-c">—</div></div>
+    <div class="st"><div class="slb">Pipeline Value</div><div class="svl" id="cr-v">—</div></div>
+  </div>
+  <div class="pipe" id="crmpp"><div style="grid-column:1/-1;text-align:center;color:var(--tx3);padding:30px">Loading...</div></div>
+</div>
+
+<!-- MARKETING -->
+<div class="pg" id="p-mkt">
+  <div class="pgh"><div><div class="pgt">📢 Marketing</div><div class="pgs">Campaign tracking · ROI</div></div>
+    <div class="pga"><button class="btn btnp" onclick="openM('camp')">+ New Campaign</button></div></div>
+  <div class="wb"><span>📌</span><div>Direct social posting requires Meta API approval. Post manually until approved.</div></div>
+  <div class="card"><div class="ch"><div class="ct">Campaigns</div></div>
+    <div class="tw"><table class="tbl" id="campt"><thead><tr><th>Campaign</th><th>Channel</th><th>Reach</th><th>Enquiries</th><th>Converted</th><th>Revenue</th><th>ROI</th><th>Status</th></tr></thead><tbody><tr><td colspan="8" style="text-align:center;color:var(--tx3);padding:20px">Loading...</td></tr></tbody></table></div>
+  </div>
+</div>
+
+<!-- ANALYTICS -->
+<div class="pg" id="p-anl">
+  <div class="pgh"><div><div class="pgt">📈 Analytics</div></div></div>
+  <div class="sg">
+    <div class="st ac"><div class="slb">Revenue YTD</div><div class="svl" id="an-r">—</div></div>
+    <div class="st"><div class="slb">Total Bookings</div><div class="svl" id="an-b">—</div></div>
+    <div class="st"><div class="slb">Avg Booking Value</div><div class="svl" id="an-a">—</div></div>
+  </div>
+  <div class="g2">
+    <div class="card"><div class="ch"><div class="ct">Monthly Revenue</div></div><div class="cb" id="an-ch"></div></div>
+    <div class="card"><div class="ch"><div class="ct">Top Destinations</div></div><div class="cb" id="an-de"></div></div>
+  </div>
+</div>
+
+<!-- IMPORT -->
+<div class="pg" id="p-imp">
+  <div class="pgh"><div><div class="pgt">⬆ Import Data</div></div></div>
+  <div class="ib"><span>ℹ</span><div>Download template → Fill data → Upload. Each row is validated before importing.</div></div>
+  <div class="g2">
+    <div class="card"><div class="ch"><div class="ct">📥 Download Templates</div></div>
+      <div style="padding:0">
+        <div class="lr" style="padding:10px 16px"><span>Bookings (all services)</span><button class="btn btns btnp" onclick="dlTpl('bookings')">📥</button></div>
+        <div class="lr" style="padding:10px 16px"><span>Clients / Parties</span><button class="btn btns btnp" onclick="dlTpl('parties')">📥</button></div>
+        <div class="lr" style="padding:10px 16px"><span>CRM Leads</span><button class="btn btns btnp" onclick="dlTpl('leads')">📥</button></div>
+        <div class="lr" style="padding:10px 16px"><span>Journal Entries</span><button class="btn btns btnp" onclick="dlTpl('accounting')">📥</button></div>
+      </div>
+    </div>
+    <div class="card"><div class="ch"><div class="ct">⬆ Upload Filled Template</div></div><div class="cb">
+      <div class="dz" onclick="toast('Upload feature coming in next update','wn')">
+        <div style="font-size:28px;margin-bottom:6px">📂</div>
+        <div style="font-size:13px;font-weight:600;color:var(--tx2)">Drop filled template here</div>
+        <div style="font-size:12px;color:var(--tx3);margin-top:4px">CSV or Excel files</div>
+      </div>
+    </div></div>
+  </div>
+</div>
+
+<!-- SETTINGS -->
+<div class="pg" id="p-set">
+  <div class="pgh"><div><div class="pgt">⚙️ Settings</div></div></div>
+  <div class="tabs">
+    <div class="tab active" onclick="stTab(this,'st-u')">Users &amp; Roles</div>
+    <div class="tab" onclick="stTab(this,'st-c')">Company Profile</div>
+    <div class="tab" onclick="stTab(this,'st-g')">GST Config</div>
+    <div class="tab" onclick="stTab(this,'st-a')">Audit Trail</div>
+  </div>
+  <div id="st-u">
+    <div class="card"><div class="ch"><div class="ct">User Accounts</div><div class="ca"><button class="btn btns btnp" onclick="openAddU()">+ Add User</button></div></div>
+      <div class="tw"><table class="tbl" id="usrt"><thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Permissions</th><th>Access Until</th><th>Status</th><th>Action</th></tr></thead><tbody><tr><td colspan="7" style="text-align:center;color:var(--tx3);padding:20px">Loading...</td></tr></tbody></table></div>
+    </div>
+  </div>
+  <div id="st-c" style="display:none">
+    <div class="card"><div class="ch"><div class="ct">Company Profile</div><div class="ca"><button class="btn btns btnp" onclick="saveCo()">Save</button></div></div><div class="cb">
+      <div class="fg2">
+        <div class="fg"><label>Company Name</label><input id="co-n" value="Volo Yatra"></div>
+        <div class="fg"><label>GSTIN</label><input id="co-g" value="06AAAAB1234C1Z5"></div>
+        <div class="fg"><label>PAN</label><input id="co-p" value="AAAAB1234C"></div>
+        <div class="fg"><label>State Code</label><input id="co-s" value="06"></div>
+        <div class="fg"><label>Phone</label><input id="co-ph" value="+91 99999 00000"></div>
+        <div class="fg"><label>Email</label><input id="co-e" value="info@voloyatra.in"></div>
+        <div class="fg" style="grid-column:1/-1"><label>Address</label><input id="co-a" value="Sector 12, NIT, Faridabad, Haryana - 121001"></div>
+        <div class="fg"><label>Bank Name</label><input id="co-bn" value="HDFC Bank"></div>
+        <div class="fg"><label>Account Number</label><input id="co-ba" value="50100XXXX"></div>
+      </div>
+    </div></div>
+  </div>
+  <div id="st-g" style="display:none">
+    <div class="card"><div class="ch"><div class="ct">GST Rates by Service</div></div>
+      <div class="tw"><table class="tbl" id="gstc"><thead><tr><th>Service</th><th>HSN/SAC</th><th>Applicable</th><th>CGST %</th><th>SGST %</th><th>IGST %</th><th>Basis</th></tr></thead><tbody><tr><td colspan="7" style="text-align:center;color:var(--tx3);padding:20px">Loading...</td></tr></tbody></table></div>
+    </div>
+  </div>
+  <div id="st-a" style="display:none">
+    <div class="card"><div class="ch"><div class="ct">Audit Trail</div></div>
+      <div class="tw"><table class="tbl" id="audt"><thead><tr><th>Time</th><th>User</th><th>Action</th><th>Module</th><th>Record</th></tr></thead><tbody><tr><td colspan="5" style="text-align:center;color:var(--tx3);padding:20px">Loading...</td></tr></tbody></table></div>
+    </div>
+  </div>
+</div>
+
+  </div></div></div>
+
+<!-- MODALS -->
+<div class="ov" id="m-bk" onclick="if(event.target===this)closeM('bk')">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="mh"><div class="mt">New Booking</div><div class="mc" onclick="closeM('bk')">✕</div></div>
+    <div class="mb">
+      <div class="fg2">
+        <div class="fg"><label>Service Type *</label><select id="nb-sv" style="padding:8px 11px;border:1px solid var(--bd);border-radius:8px;font-size:13px;font-family:'DM Sans',sans-serif;background:#fff;width:100%"><option value="air">Air Ticketing</option><option value="hotel">Hotel</option><option value="train">Train</option><option value="visa">Visa</option><option value="tour">Tour Package</option><option value="taxi">Taxi</option></select></div>
+        <div class="fg"><label>Party / Client Name *</label><input id="nb-p" placeholder="e.g. Mehta Travels Pvt Ltd"></div>
+        <div class="fg"><label>PNR / Reference</label><input id="nb-pnr" placeholder="PNR or booking ref"></div>
+        <div class="fg"><label>Vendor / Airline</label><input id="nb-v" placeholder="e.g. IndiGo, Taj Hotels"></div>
+        <div class="fg"><label>From</label><input id="nb-f" placeholder="e.g. DEL"></div>
+        <div class="fg"><label>To / Destination</label><input id="nb-t" placeholder="e.g. BOM or Dubai 5N"></div>
+        <div class="fg"><label>Travel Date</label><input type="date" id="nb-d"></div>
+        <div class="fg"><label>Passengers</label><input type="number" id="nb-px" value="1" min="1"></div>
+        <div class="fg"><label>Gross Fare (₹)</label><input type="number" id="nb-g" placeholder="0" oninput="cBkT()"></div>
+        <div class="fg"><label>Service Fee (₹)</label><input type="number" id="nb-sf" placeholder="0" oninput="cBkT()"></div>
+        <div class="fg"><label>Total Amount (₹)</label><input type="number" id="nb-ta" placeholder="0"></div>
+        <div class="fg"><label>Cost Price (₹)</label><input type="number" id="nb-c" placeholder="Supplier cost"></div>
+      </div>
+      <div class="fg"><label>Notes</label><textarea id="nb-n" placeholder="Any remarks..."></textarea></div>
+    </div>
+    <div class="mf"><button class="btn" onclick="closeM('bk')">Cancel</button><button class="btn btnp" id="nbBtn" onclick="saveBk()">Save Booking</button></div>
+  </div>
+</div>
+
+<div class="ov" id="m-inv" onclick="if(event.target===this)closeM('inv')">
+  <div class="modal" onclick="event.stopPropagation()" style="max-width:640px">
+    <div class="mh"><div class="mt">Generate Invoice</div><div class="mc" onclick="closeM('inv')">✕</div></div>
+    <div class="mb">
+      <div class="fg2">
+        <div class="fg"><label>Booking ID (optional)</label><input id="gi-b" placeholder="Leave blank for manual invoice"></div>
+        <div class="fg"><label>Service Type</label><select id="gi-sv" style="padding:8px 11px;border:1px solid var(--bd);border-radius:8px;font-size:13px;font-family:'DM Sans',sans-serif;background:#fff;width:100%"><option value="air">Air Ticketing</option><option value="hotel">Hotel</option><option value="tour">Tour Package</option><option value="visa">Visa</option><option value="train">Train</option><option value="taxi">Taxi</option></select></div>
+        <div class="fg"><label>Invoice Type</label><select id="gi-t" style="padding:8px 11px;border:1px solid var(--bd);border-radius:8px;font-size:13px;font-family:'DM Sans',sans-serif;background:#fff;width:100%"><option value="tax_invoice">Tax Invoice (GST Customer)</option><option value="customer_invoice">Customer Invoice (Non-GST)</option><option value="proforma">Proforma</option></select></div>
+        <div class="fg"><label>Party Name *</label><input id="gi-p" placeholder="Client / Company name"></div>
+        <div class="fg"><label>GSTIN</label><input id="gi-g" placeholder="15-digit GSTIN if applicable"></div>
+        <div class="fg"><label>Party Address</label><input id="gi-a" placeholder="Billing address"></div>
+      </div>
+      <div style="border-top:1px solid var(--bd);margin:14px 0 12px;padding-top:12px">
+        <div style="font-size:11px;font-weight:700;color:var(--nv);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px">💳 Ticket / Package Cost Details</div>
+        <div class="fg2">
+          <div class="fg"><label>Gross Fare / Package Cost (₹)</label><input type="number" id="gi-gf" placeholder="0" oninput="cInv()"></div>
+          <div class="fg"><label>Supplier / Vendor Cost (₹)</label><input type="number" id="gi-co" placeholder="0" oninput="cInv()"></div>
+        </div>
+        <div style="font-size:11px;font-weight:700;color:var(--nv);text-transform:uppercase;letter-spacing:.6px;margin:10px 0">🧾 Service Charges (Taxable)</div>
+        <div class="fg3">
+          <div class="fg"><label>Service Fee / Markup (₹) *</label><input type="number" id="gi-f" placeholder="0" oninput="cInv()"></div>
+          <div class="fg"><label>Other Charges (₹)</label><input type="number" id="gi-o" placeholder="0" oninput="cInv()"></div>
+          <div class="fg"><label>HSN/SAC</label><input id="gi-h" value="9983"></div>
+        </div>
+        <div class="fg3">
+          <div class="fg"><label>CGST %</label><input type="number" id="gi-cg" value="9" oninput="cInv()"></div>
+          <div class="fg"><label>SGST %</label><input type="number" id="gi-sg" value="9" oninput="cInv()"></div>
+          <div class="fg"><label>IGST %</label><input type="number" id="gi-ig" value="0" oninput="cInv()"></div>
+        </div>
+        <div id="invca" style="background:var(--cr);border-radius:8px;padding:12px;font-size:13px">
+          <div class="g2" style="gap:4px 14px">
+            <div class="lr" style="padding:3px 0;border:none"><span>Gross Fare</span><span id="ic-g">₹0</span></div>
+            <div class="lr" style="padding:3px 0;border:none"><span>Service Fee</span><span id="ic-f">₹0</span></div>
+            <div class="lr" style="padding:3px 0;border:none"><span>Other Charges</span><span id="ic-o">₹0</span></div>
+            <div class="lr" style="padding:3px 0;border:none"><span>CGST</span><span id="ic-cg">₹0</span></div>
+            <div class="lr" style="padding:3px 0;border:none"><span>SGST</span><span id="ic-sg">₹0</span></div>
+            <div class="lr" style="padding:3px 0;border:none"><span>IGST</span><span id="ic-ig">₹0</span></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding-top:8px;margin-top:4px;border-top:1px solid var(--bd);font-weight:700;font-size:15px;color:var(--nv)"><span>Total Invoice</span><span id="ic-t">₹0</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:12px;margin-top:4px"><span>Your Profit</span><span id="ic-pr" style="font-weight:600;color:var(--ok)">₹0</span></div>
+        </div>
+      </div>
+      <div class="fg2">
+        <div class="fg"><label>Invoice Date</label><input type="date" id="gi-d"></div>
+        <div class="fg"><label>Due Date</label><input type="date" id="gi-du"></div>
+      </div>
+      <div class="fg"><label>Notes / Ticket Details (PNR, flight, route)</label><input id="gi-n" placeholder="e.g. DEL-BOM 01 May, IndiGo 6E-202, PNR: TZMX4A"></div>
+    </div>
+    <div class="mf"><button class="btn" onclick="closeM('inv')">Cancel</button><button class="btn btnp" id="giBtn" onclick="saveInv()">Generate Invoice</button></div>
+  </div>
+</div>
+
+<div class="ov" id="m-je" onclick="if(event.target===this)closeM('je')">
+  <div class="modal" onclick="event.stopPropagation()" style="max-width:680px">
+    <div class="mh"><div class="mt">Manual Journal Entry</div><div class="mc" onclick="closeM('je')">✕</div></div>
+    <div class="mb">
+      <div class="ib"><span>ℹ</span><div>Add multiple lines. <strong>Post enabled only when Debit = Credit.</strong></div></div>
+      <div class="fg2">
+        <div class="fg"><label>Voucher Type</label><select id="je-v" style="padding:8px 11px;border:1px solid var(--bd);border-radius:8px;font-size:13px;font-family:'DM Sans',sans-serif;background:#fff;width:100%"><option>Journal</option><option>Payment</option><option>Receipt</option><option>Contra</option><option>Purchase</option></select></div>
+        <div class="fg"><label>Date</label><input type="date" id="je-d"></div>
+      </div>
+      <div class="fg"><label>Narration</label><input id="je-n" placeholder="Description of this entry..."></div>
+      <div style="border-top:1px solid var(--bd);margin:12px 0 10px;padding-top:10px">
+        <div style="display:grid;grid-template-columns:1fr 110px 1fr 110px 28px;gap:6px;margin-bottom:6px">
+          <span style="font-size:11px;font-weight:700;color:var(--tx3);text-transform:uppercase">Debit Account</span>
+          <span style="font-size:11px;font-weight:700;color:var(--tx3);text-transform:uppercase">Debit (₹)</span>
+          <span style="font-size:11px;font-weight:700;color:var(--tx3);text-transform:uppercase">Credit Account</span>
+          <span style="font-size:11px;font-weight:700;color:var(--tx3);text-transform:uppercase">Credit (₹)</span>
+          <span></span>
+        </div>
+        <div id="jel"></div>
+        <button class="btn btns" onclick="addJEL()" style="margin-top:6px">+ Add Line</button>
+      </div>
+      <div style="background:var(--cr);border-radius:8px;padding:10px 14px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;font-size:13px;margin-top:8px">
+        <div><div style="font-size:10px;color:var(--tx3);text-transform:uppercase;font-weight:600">Total Debit</div><div style="font-size:16px;font-weight:700;color:var(--nv)" id="je-td">₹0</div></div>
+        <div><div style="font-size:10px;color:var(--tx3);text-transform:uppercase;font-weight:600">Total Credit</div><div style="font-size:16px;font-weight:700;color:var(--nv)" id="je-tc">₹0</div></div>
+        <div><div style="font-size:10px;color:var(--tx3);text-transform:uppercase;font-weight:600">Difference</div><div style="font-size:16px;font-weight:700" id="je-df">₹0</div></div>
+      </div>
+      <div id="je-m" style="display:none;margin-top:8px;padding:8px 12px;border-radius:6px;font-size:12px;font-weight:600"></div>
+    </div>
+    <div class="mf"><button class="btn" onclick="closeM('je')">Cancel</button><button class="btn btnp" id="jeBtn" onclick="saveJE()" disabled>Post Entry</button></div>
+  </div>
+</div>
+
+<div class="ov" id="m-lead" onclick="if(event.target===this)closeM('lead')">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="mh"><div class="mt">Add Lead</div><div class="mc" onclick="closeM('lead')">✕</div></div>
+    <div class="mb">
+      <div class="fg2">
+        <div class="fg"><label>Name *</label><input id="al-n" placeholder="Lead name"></div>
+        <div class="fg"><label>Phone *</label><input id="al-p" placeholder="+91 XXXXX XXXXX"></div>
+        <div class="fg"><label>Source</label><select id="al-s" style="padding:8px 11px;border:1px solid var(--bd);border-radius:8px;font-size:13px;font-family:'DM Sans',sans-serif;background:#fff;width:100%"><option value="instagram">Instagram</option><option value="facebook">Facebook</option><option value="whatsapp">WhatsApp</option><option value="website">Website</option><option value="walkin">Walk-in</option><option value="referral">Referral</option></select></div>
+        <div class="fg"><label>Interest</label><select id="al-sv" style="padding:8px 11px;border:1px solid var(--bd);border-radius:8px;font-size:13px;font-family:'DM Sans',sans-serif;background:#fff;width:100%"><option value="tour">Tour Package</option><option value="air">Air Ticket</option><option value="hotel">Hotel</option><option value="visa">Visa</option><option value="train">Train</option></select></div>
+        <div class="fg"><label>Destination</label><input id="al-d" placeholder="e.g. Dubai 5N, Europe Tour"></div>
+        <div class="fg"><label>Est. Value (₹)</label><input type="number" id="al-v" placeholder="0"></div>
+        <div class="fg"><label>Travel Date</label><input type="date" id="al-dt"></div>
+        <div class="fg"><label>Passengers</label><input type="number" id="al-px" value="1"></div>
+      </div>
+      <div class="fg"><label>Notes</label><textarea id="al-no" placeholder="Enquiry details..."></textarea></div>
+    </div>
+    <div class="mf"><button class="btn" onclick="closeM('lead')">Cancel</button><button class="btn btnp" id="alBtn" onclick="saveLead()">Save Lead</button></div>
+  </div>
+</div>
+
+<div class="ov" id="m-usr" onclick="if(event.target===this)closeM('usr')">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="mh"><div class="mt" id="umt">Add User</div><div class="mc" onclick="closeM('usr')">✕</div></div>
+    <div class="mb">
+      <input type="hidden" id="uf-i">
+      <div class="fg2">
+        <div class="fg"><label>Full Name *</label><input id="uf-n" placeholder="Staff member name"></div>
+        <div class="fg"><label>Email *</label><input type="email" id="uf-e" placeholder="name@voloyatra.in"></div>
+        <div class="fg"><label>Password <span id="uf-pn" style="font-weight:400;color:var(--tx3);display:none">(blank = keep current)</span></label><input type="password" id="uf-pw" placeholder="Set strong password"></div>
+        <div class="fg"><label>Role</label><select id="uf-r" style="padding:8px 11px;border:1px solid var(--bd);border-radius:8px;font-size:13px;font-family:'DM Sans',sans-serif;background:#fff;width:100%"><option value="staff">Sales Staff</option><option value="accounts">Accounts</option><option value="ops">Operations</option><option value="admin">Admin</option></select></div>
+        <div class="fg"><label>Permissions</label><input id="uf-pe" placeholder="bookings,crm,invoicing"></div>
+        <div class="fg"><label>Access Until</label><input type="date" id="uf-u"></div>
+        <div class="fg"><label>Status</label><select id="uf-a" style="padding:8px 11px;border:1px solid var(--bd);border-radius:8px;font-size:13px;font-family:'DM Sans',sans-serif;background:#fff;width:100%"><option value="true">Active</option><option value="false">Inactive</option></select></div>
+      </div>
+    </div>
+    <div class="mf"><button class="btn" onclick="closeM('usr')">Cancel</button><button class="btn btnp" id="ufBtn" onclick="saveUser()">Save</button></div>
+  </div>
+</div>
+
+<div class="ov" id="m-addba" onclick="if(event.target===this)closeM('addba')">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="mh"><div class="mt">Add Bank / Cash Account</div><div class="mc" onclick="closeM('addba')">✕</div></div>
+    <div class="mb">
+      <div class="ib"><span>ℹ</span><div>Ledger auto-created in Accounting. All banking features activate immediately.</div></div>
+      <div class="fg2">
+        <div class="fg"><label>Account Name *</label><input id="ba-n" placeholder="e.g. HDFC Current Account"></div>
+        <div class="fg"><label>Bank Name *</label><input id="ba-b" placeholder="e.g. HDFC Bank"></div>
+        <div class="fg"><label>Account Number</label><input id="ba-ac" placeholder="e.g. 50100XXXXXXXX"></div>
+        <div class="fg"><label>IFSC Code</label><input id="ba-if" placeholder="e.g. HDFC0001234"></div>
+        <div class="fg"><label>Account Type</label><select id="ba-t" style="padding:8px 11px;border:1px solid var(--bd);border-radius:8px;font-size:13px;font-family:'DM Sans',sans-serif;background:#fff;width:100%"><option value="current">Current</option><option value="savings">Savings</option><option value="cash">Cash / Petty Cash</option></select></div>
+        <div class="fg"><label>Opening Balance (₹)</label><input type="number" id="ba-ob" placeholder="0"></div>
+      </div>
+    </div>
+    <div class="mf"><button class="btn" onclick="closeM('addba')">Cancel</button><button class="btn btnp" onclick="saveBA()">Add Account</button></div>
+  </div>
+</div>
+
+<div class="ov" id="m-camp" onclick="if(event.target===this)closeM('camp')">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="mh"><div class="mt">New Campaign</div><div class="mc" onclick="closeM('camp')">✕</div></div>
+    <div class="mb">
+      <div class="fg"><label>Campaign Name *</label><input id="nc-n" placeholder="e.g. Summer Europe Sale 2026"></div>
+      <div class="fg2">
+        <div class="fg"><label>Channel</label><select id="nc-c" style="padding:8px 11px;border:1px solid var(--bd);border-radius:8px;font-size:13px;font-family:'DM Sans',sans-serif;background:#fff;width:100%"><option value="instagram">Instagram</option><option value="facebook">Facebook</option><option value="whatsapp">WhatsApp</option><option value="email">Email</option></select></div>
+        <div class="fg"><label>Budget (₹)</label><input type="number" id="nc-b" placeholder="0"></div>
+        <div class="fg"><label>Start Date</label><input type="date" id="nc-s"></div>
+        <div class="fg"><label>End Date</label><input type="date" id="nc-e"></div>
+      </div>
+    </div>
+    <div class="mf"><button class="btn" onclick="closeM('camp')">Cancel</button><button class="btn btnp" onclick="saveCamp()">Create</button></div>
+  </div>
+</div>
+
+<div class="tw2" id="tw"></div>
+<script>
+// API
+async function api(m,u,d,isF){try{const o={method:m,credentials:'include'};if(isF){o.body=d;}else{o.headers={'Content-Type':'application/json'};if(d)o.body=JSON.stringify(d);}const r=await fetch(u,o);return await r.json();}catch(e){console.error(e);return{error:'Network error'};}}
+// AUTH
+let CU=null;
+async function doLogin(){
+  const btn=document.getElementById('lbtn'),err=document.getElementById('le');
+  err.style.display='none';btn.innerHTML='<span class="spn"></span> Signing in...';btn.disabled=true;
+  const r=await api('POST','/auth/login',{email:document.getElementById('lem').value,password:document.getElementById('lpw').value});
+  btn.innerHTML='Sign In →';btn.disabled=false;
+  if(r.success){CU=r.user;showApp();}else{err.textContent=r.error||'Login failed';err.style.display='block';}
+}
+document.getElementById('lpw').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
+async function doLogout(){await api('POST','/auth/logout');document.getElementById('app').style.display='none';document.getElementById('lp').style.display='flex';CU=null;}
+async function checkAuth(){const r=await api('GET','/auth/me');if(r.user){CU=r.user;showApp();}}
+function showApp(){
+  document.getElementById('lp').style.display='none';document.getElementById('app').style.display='flex';
+  const h=new Date().getHours();const g=h<12?'Good morning':h<17?'Good afternoon':'Good evening';
+  document.getElementById('dg').textContent=`${g}, ${CU.name.split(' ')[0]} 👋`;
+  document.getElementById('dd').textContent=new Date().toLocaleDateString('en-IN',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  document.getElementById('ua').textContent=CU.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+  document.getElementById('un').textContent=CU.name;
+  document.getElementById('uro').textContent=CU.role==='admin'?'Administrator':CU.role;
+  loadDash();loadBAs();
+}
+// NAV
+const SVP=['air','hotel','train','visa','tour','taxi'];
+const PT={dash:'Dashboard',air:'✈ Air Ticketing',hotel:'🏨 Hotel Booking',train:'🚆 Train Ticketing',visa:'📋 Visa Services',tour:'🗺️ Tour Packages',taxi:'🚗 Taxi & Bus',inv:'🧾 Invoicing',acc:'📊 Accounting',bnk:'🏦 Banking & Cash',crm:'👥 CRM & Leads',mkt:'📢 Marketing',anl:'📈 Analytics',imp:'⬆ Import',set:'⚙️ Settings'};
+let curPg='dash',curSvc='air';
+function nav(p,el){
+  document.querySelectorAll('.pg').forEach(x=>x.classList.remove('active'));
+  if(SVP.includes(p)){curSvc=p;document.getElementById('p-bk').classList.add('active');loadBk();}else document.getElementById('p-'+p)?.classList.add('active');
+  curPg=p;document.getElementById('pgt').textContent=PT[p]||p;
+  if(el){document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));el.classList.add('active');}
+  const ld={dash:loadDash,inv:loadInv,acc:loadAccS,bnk:loadBankP,crm:loadCRM,mkt:loadCamp,anl:loadAnl,set:loadSet};
+  if(ld[p])ld[p]();closeSB();
+}
+// HELPERS
+function fmt(v){const n=parseFloat(v)||0;if(n>=10000000)return'₹'+(n/10000000).toFixed(2)+'Cr';if(n>=100000)return'₹'+(n/100000).toFixed(2)+'L';if(n>=1000)return'₹'+(n/1000).toFixed(1)+'K';return'₹'+n.toLocaleString('en-IN',{maximumFractionDigits:0});}
+function pc(s){const m={confirmed:'ps',paid:'ps',approved:'ps',active:'ps',converted:'ps',submitted:'pi',pending:'pw',processing:'pw',waitlisted:'pw',rac:'pw',waiting:'pw',unpaid:'pw',overdue:'pd',cancelled:'pd',rejected:'pd'};return m[s?.toLowerCase()]||'pg2';}
+function toast(msg,type){const w=document.getElementById('tw');const d=document.createElement('div');d.className=`toast${type?' '+type:''}`;const ic=type==='ok'?'✅':type==='er'?'❌':type==='wn'?'⚠️':'ℹ️';d.innerHTML=`<span>${ic}</span> ${msg}`;w.appendChild(d);setTimeout(()=>d.remove(),3100);}
+function openM(id){if(id==='je'){initJEL();document.getElementById('je-d').value=new Date().toISOString().slice(0,10);}if(id==='inv'){cInv();document.getElementById('gi-d').value=new Date().toISOString().slice(0,10);}document.getElementById('m-'+id)?.classList.add('open');}
+function closeM(id){document.getElementById('m-'+id)?.classList.remove('open');}
+function toggleSB(){document.getElementById('sb').classList.toggle('open');document.getElementById('sbo').classList.toggle('open');}
+function closeSB(){document.getElementById('sb').classList.remove('open');document.getElementById('sbo').classList.remove('open');}
+// DASHBOARD
+async function loadDash(){
+  const r=await api('GET','/api/dashboard');if(r.error)return;
+  document.getElementById('d-r').textContent=fmt(r.revenue);document.getElementById('d-b').textContent=r.activeBookings;document.getElementById('d-i').textContent=fmt(r.pendingInvAmt);document.getElementById('d-ic').textContent=r.pendingInvCnt+' invoices';document.getElementById('d-l').textContent=r.openLeads;
+  const tb=document.getElementById('d-bt');
+  tb.innerHTML=r.recentBookings.length?r.recentBookings.map(b=>`<tr><td class="tid">#${b.booking_ref}</td><td>${b.party_name}</td><td>${b.service_type}</td><td>${fmt(b.total_amount)}</td><td><span class="pill ${pc(b.status)}">${b.status}</span></td></tr>`).join(''):'<tr><td colspan="5" style="text-align:center;color:var(--tx3);padding:20px">No bookings yet</td></tr>';
+  const sp=document.getElementById('d-sp');
+  if(r.breakdown.length){const tot=r.breakdown.reduce((s,x)=>s+parseFloat(x.rev),0)||1;const cols=['var(--nv3)','var(--gd)','#16a34a','#7c3aed','#6b7280'];sp.innerHTML=r.breakdown.map((x,i)=>`<div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px"><span style="text-transform:capitalize">${x.service_type}</span><span style="font-weight:600">${fmt(x.rev)}</span></div><div class="prog"><div class="pf" style="width:${Math.round(x.rev/tot*100)}%;background:${cols[i%5]}"></div></div></div>`).join('');}
+  else sp.innerHTML='<div style="text-align:center;color:var(--tx3);padding:20px">No data yet</div>';
+}
+// BOOKINGS
+const SVCLB={air:'✈ Air Ticketing',hotel:'🏨 Hotel Booking',train:'🚆 Train Ticketing',visa:'📋 Visa Services',tour:'🗺️ Tour Packages',taxi:'🚗 Taxi & Bus'};
+async function loadBk(){
+  document.getElementById('bk-h').textContent=SVCLB[curSvc]||curSvc;
+  const s=document.getElementById('bks').value,st=document.getElementById('bkst').value;
+  const r=await api('GET',`/api/bookings?service_type=${curSvc}&search=${encodeURIComponent(s)}&status=${st}`);
+  const tb=document.querySelector('#bkt tbody');
+  if(r.error){tb.innerHTML=`<tr><td colspan="8" style="text-align:center;color:var(--er);padding:20px">${r.error}</td></tr>`;return;}
+  if(!r.bookings.length){tb.innerHTML=`<tr><td colspan="8" style="text-align:center;color:var(--tx3);padding:24px">No ${curSvc} bookings yet. <a href="#" onclick="openM('bk')" style="color:var(--nv3)">Create first →</a></td></tr>`;return;}
+  tb.innerHTML=r.bookings.map(b=>`<tr><td class="tid">#${b.booking_ref}</td><td>${b.party_name}</td><td style="font-size:12px">${b.route_from||''}${b.route_to?' → '+b.route_to:''}</td><td style="font-size:12px">${b.travel_date?new Date(b.travel_date).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}):'—'}</td><td>${b.passengers}</td><td style="font-weight:600">${fmt(b.total_amount)}</td><td><span class="pill ${pc(b.status)}">${b.status}</span></td><td><button class="btn btns btnp" onclick="preInv(${b.id},'${b.party_name.replace(/'/g,"\\'")}',${b.service_fee||0},'${b.service_type}')">🧾 Invoice</button></td></tr>`).join('');
+}
+function cBkT(){const g=parseFloat(document.getElementById('nb-g').value)||0;const f=parseFloat(document.getElementById('nb-sf').value)||0;document.getElementById('nb-ta').value=g+f||'';}
+function preInv(id,p,f,sv){document.getElementById('gi-b').value=id;document.getElementById('gi-p').value=p;document.getElementById('gi-f').value=f||'';document.getElementById('gi-sv').value=sv||'air';cInv();openM('inv');}
+async function saveBk(){
+  const btn=document.getElementById('nbBtn');const party=document.getElementById('nb-p').value.trim();
+  if(!party){toast('Party name required','er');return;}
+  btn.innerHTML='<span class="spn"></span>';btn.disabled=true;
+  const g=parseFloat(document.getElementById('nb-g').value)||0;const f=parseFloat(document.getElementById('nb-sf').value)||0;
+  const r=await api('POST','/api/bookings',{service_type:document.getElementById('nb-sv').value,party_name:party,pnr_ref:document.getElementById('nb-pnr').value,vendor:document.getElementById('nb-v').value,route_from:document.getElementById('nb-f').value,route_to:document.getElementById('nb-t').value,travel_date:document.getElementById('nb-d').value||null,passengers:parseInt(document.getElementById('nb-px').value)||1,gross_fare:g,service_fee:f,total_amount:parseFloat(document.getElementById('nb-ta').value)||(g+f),cost_price:parseFloat(document.getElementById('nb-c').value)||0,notes:document.getElementById('nb-n').value,status:'pending'});
+  btn.innerHTML='Save Booking';btn.disabled=false;
+  if(r.success){toast(`#${r.booking.booking_ref} saved ✓`,'ok');closeM('bk');SVP.includes(curPg)?loadBk():loadDash();}else toast(r.error||'Failed','er');
+}
+// INVOICES
+function cInv(){
+  const g=parseFloat(document.getElementById('gi-gf').value)||0;const f=parseFloat(document.getElementById('gi-f').value)||0;const o=parseFloat(document.getElementById('gi-o').value)||0;const c=parseFloat(document.getElementById('gi-co').value)||0;const cg=parseFloat(document.getElementById('gi-cg').value)||0;const sg=parseFloat(document.getElementById('gi-sg').value)||0;const ig=parseFloat(document.getElementById('gi-ig').value)||0;
+  const tax=f+o;const cga=tax*cg/100;const sga=tax*sg/100;const iga=tax*ig/100;const tot=g+tax+cga+sga+iga;const pr=f+o-c;
+  const f2=v=>'₹'+v.toLocaleString('en-IN',{minimumFractionDigits:2,maximumFractionDigits:2});
+  document.getElementById('ic-g').textContent=f2(g);document.getElementById('ic-f').textContent=f2(f);document.getElementById('ic-o').textContent=f2(o);document.getElementById('ic-cg').textContent=f2(cga);document.getElementById('ic-sg').textContent=f2(sga);document.getElementById('ic-ig').textContent=f2(iga);document.getElementById('ic-t').textContent=f2(tot);
+  const pe=document.getElementById('ic-pr');pe.textContent=f2(pr);pe.style.color=pr>=0?'var(--ok)':'var(--er)';
+}
+async function loadInv(){
+  const s=document.getElementById('invs').value,st=document.getElementById('invst').value;
+  const r=await api('GET',`/api/invoices?status=${st}&search=${encodeURIComponent(s)}`);
+  const tb=document.querySelector('#invt tbody');
+  if(!Array.isArray(r)){tb.innerHTML='<tr><td colspan="9" style="text-align:center;color:var(--er);padding:20px">Error loading</td></tr>';return;}
+  if(!r.length){tb.innerHTML='<tr><td colspan="9" style="text-align:center;color:var(--tx3);padding:20px">No invoices found</td></tr>';return;}
+  tb.innerHTML=r.map(i=>`<tr><td class="tid">${i.invoice_number}</td><td>${i.party_name}</td><td style="font-size:12px">${i.invoice_date?.slice(0,10)||'—'}</td><td>${fmt(i.gross_fare)}</td><td>${fmt(i.taxable_amount)}</td><td>${fmt(parseFloat(i.cgst_amount||0)+parseFloat(i.sgst_amount||0)+parseFloat(i.igst_amount||0))}</td><td style="font-weight:600">${fmt(i.total_amount)}</td><td><span class="pill ${pc(i.status)}">${i.status}</span></td><td><div style="display:flex;gap:4px">${i.status==='unpaid'?`<button class="btn btns btnp" onclick="markPaid(${i.id})">Paid</button>`:''}<button class="btn btns" onclick="printInv(${JSON.stringify(i).replace(/"/g,'&quot;')})">🖨️</button></div></td></tr>`).join('');
+}
+async function saveInv(){
+  const btn=document.getElementById('giBtn');const party=document.getElementById('gi-p').value.trim();
+  if(!party){toast('Party name required','er');return;}
+  btn.innerHTML='<span class="spn"></span>';btn.disabled=true;
+  const f=parseFloat(document.getElementById('gi-f').value)||0;const o=parseFloat(document.getElementById('gi-o').value)||0;
+  const r=await api('POST','/api/invoices',{booking_id:parseInt(document.getElementById('gi-b').value)||null,service_type:document.getElementById('gi-sv').value,invoice_type:document.getElementById('gi-t').value,party_name:party,party_gstin:document.getElementById('gi-g').value,party_address:document.getElementById('gi-a').value,gross_fare:parseFloat(document.getElementById('gi-gf').value)||0,taxable_amount:f+o,cgst_rate:parseFloat(document.getElementById('gi-cg').value)||9,sgst_rate:parseFloat(document.getElementById('gi-sg').value)||9,igst_rate:parseFloat(document.getElementById('gi-ig').value)||0,hsn_sac:document.getElementById('gi-h').value||'9983',invoice_date:document.getElementById('gi-d').value||null,due_date:document.getElementById('gi-du').value||null,notes:document.getElementById('gi-n').value});
+  btn.innerHTML='Generate Invoice';btn.disabled=false;
+  if(r.success){toast(`${r.invoice.invoice_number} generated ✓ Auto journal posted`,'ok');closeM('inv');loadInv();}else toast(r.error||'Failed','er');
+}
+async function markPaid(id){const r=await api('PUT',`/api/invoices/${id}/mark-paid`,{payment_mode:'NEFT'});if(r.success){toast('Marked as paid ✓','ok');loadInv();}else toast(r.error||'Failed','er');}
+function printInv(i){const w=window.open('','_blank');w.document.write(`<!DOCTYPE html><html><head><title>${i.invoice_number}</title><style>body{font-family:Arial,sans-serif;font-size:12px;margin:20px;color:#1a1f2e}table{width:100%;border-collapse:collapse;margin:16px 0}th{background:#0f2744;color:#fff;padding:8px;text-align:left}td{padding:7px 8px;border-bottom:1px solid #e8e3d8}@media print{button{display:none}}</style></head><body><div style="display:flex;justify-content:space-between;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid #0f2744"><div><div style="font-size:20px;font-weight:700;color:#d4951a">✈ Volo Yatra</div><div style="font-size:11px;color:#8a9ab0">Faridabad, Haryana · info@voloyatra.in</div></div><div style="text-align:right"><div style="font-size:16px;font-weight:700">${(i.invoice_type||'INVOICE').replace(/_/g,' ').toUpperCase()}</div><div>${i.invoice_number}</div><div>Date: ${i.invoice_date?.slice(0,10)||'—'}</div></div></div><div style="margin-bottom:16px"><b>Bill To:</b><br>${i.party_name}${i.party_gstin?'<br>GSTIN: '+i.party_gstin:''}</div>${i.notes?'<div style="margin-bottom:12px;padding:8px;background:#faf8f4;border-radius:6px;font-size:11px"><b>Details:</b> '+i.notes+'</div>':''}<table><thead><tr><th>Description</th><th>Taxable</th><th>CGST ${i.cgst_rate}%</th><th>SGST ${i.sgst_rate}%</th><th>Total</th></tr></thead><tbody><tr><td>${(i.service_type||'Service').toUpperCase()} Services</td><td>₹${parseFloat(i.taxable_amount||0).toLocaleString('en-IN')}</td><td>₹${parseFloat(i.cgst_amount||0).toLocaleString('en-IN')}</td><td>₹${parseFloat(i.sgst_amount||0).toLocaleString('en-IN')}</td><td style="font-weight:700">₹${parseFloat(i.total_amount||0).toLocaleString('en-IN')}</td></tr></tbody></table><div style="text-align:right;font-size:14px;font-weight:700;margin-top:10px">Grand Total: ₹${parseFloat(i.total_amount||0).toLocaleString('en-IN')}</div><br><button onclick="window.print()" style="padding:8px 16px;background:#0f2744;color:#fff;border:none;border-radius:6px;cursor:pointer">🖨️ Print / Save PDF</button></body></html>`);w.document.close();}
+// ACCOUNTING
+async function loadAccS(){
+  const r=await api('GET','/api/accounting/summary');
+  if(!r.error){document.getElementById('ac-r').textContent=fmt(r.ytdRevenue);document.getElementById('ac-d').textContent=fmt(r.debtors);document.getElementById('ac-g').textContent=fmt(r.gstLiability);document.getElementById('pl-t').textContent=fmt(r.ytdRevenue);document.getElementById('pl-n').textContent=fmt(r.ytdRevenue*0.18);}
+  loadJE();
+}
+function acTab(el,id){document.querySelectorAll('#p-acc .tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');['at-je','at-age','at-gst','at-pl'].forEach(i=>{const e=document.getElementById(i);if(e)e.style.display='none';});document.getElementById(id).style.display='block';if(id==='at-age')loadAge();if(id==='at-gst')loadGSTSm();}
+async function loadJE(){const r=await api('GET','/api/accounting/journal-entries');const tb=document.getElementById('jet');if(!Array.isArray(r)||!r.length){tb.innerHTML='<tr><td colspan="4" style="text-align:center;color:var(--tx3);padding:16px">No journal entries yet</td></tr>';return;}tb.innerHTML=r.map(e=>`<tr><td class="tid">${e.entry_number}</td><td style="font-size:12px">${new Date(e.created_at).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})}</td><td>${e.narration||'—'}</td><td><span class="pill ${e.is_auto?'pg2':'pi'}">${e.is_auto?'Auto':'Manual'}</span></td></tr>`).join('');}
+async function loadAge(){
+  const r=await api('GET','/api/accounting/ageing');const tb=document.getElementById('aget');
+  if(!Array.isArray(r)||!r.length){tb.innerHTML='<tr><td colspan="6" style="text-align:center;color:var(--tx3);padding:16px">No outstanding debtors</td></tr>';return;}
+  tb.innerHTML=r.map(x=>`<tr><td style="font-weight:600">${x.party_name}</td><td class="cr">${fmt(x.days_0_30)}</td><td class="${x.days_31_60>0?'dr':''}">${fmt(x.days_31_60)}</td><td class="${x.days_60_plus>0?'dr':''}">${fmt(x.days_60_plus)}</td><td style="font-weight:700">${fmt(x.total)}</td><td><div style="display:flex;gap:4px;flex-wrap:wrap"><button class="btn btns btnp" onclick="dlLed('${x.party_name.replace(/'/g,"\\'")}','pdf',false)">📄 PDF</button><button class="btn btns" onclick="dlLed('${x.party_name.replace(/'/g,"\\'")}','csv',false)">📊 Excel</button><button class="btn btns" style="background:var(--wnb);color:var(--wn);border-color:rgba(146,64,14,.2)" onclick="dlLed('${x.party_name.replace(/'/g,"\\'")}','pdf',true)">⏳ Pending PDF</button><button class="btn btns" style="background:var(--wnb);color:var(--wn);border-color:rgba(146,64,14,.2)" onclick="dlLed('${x.party_name.replace(/'/g,"\\'")}','csv',true)">⏳ Pending CSV</button></div></td></tr>`).join('');
+}
+async function loadGSTSm(){const r=await api('GET','/api/accounting/gst-summary');const tb=document.getElementById('gstt');if(!Array.isArray(r)||!r.length){tb.innerHTML='<tr><td colspan="6" style="text-align:center;color:var(--tx3);padding:16px">No GST data this month</td></tr>';return;}tb.innerHTML=r.map(x=>`<tr><td style="text-transform:capitalize">${x.service_type}</td><td>${fmt(x.taxable)}</td><td>${fmt(x.cgst)}</td><td>${fmt(x.sgst)}</td><td>${fmt(x.igst)}</td><td style="font-weight:700">${fmt(x.total_gst)}</td></tr>`).join('');}
+async function dlLed(pn,fmt2,pend){
+  const r=await api('GET',`/api/accounting/party-ledger/${encodeURIComponent(pn)}?pendingOnly=${pend}`);
+  if(!Array.isArray(r)||!r.length){toast('No invoices found for this party','wn');return;}
+  if(fmt2==='csv'){
+    const h=['Invoice No.','Date','Service','Route','PNR','Gross Fare','Taxable','GST','Total','Status'];
+    const rows=r.map(i=>[i.invoice_number,i.invoice_date?.slice(0,10)||'',i.service_type||'',`${i.route_from||''}${i.route_to?' → '+i.route_to:''}`,i.pnr_ref||'',i.gross_fare||0,i.taxable_amount||0,parseFloat(i.cgst_amount||0)+parseFloat(i.sgst_amount||0),i.total_amount||0,i.status]);
+    const csv=[h,...rows].map(row=>row.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(',')).join('\r\n');
+    const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'}));a.download=`${pn}_Ledger${pend?'_Pending':''}.csv`;a.click();toast('CSV downloaded ✓','ok');
+  }else{
+    const tot=r.reduce((s,i)=>s+parseFloat(i.total_amount||0),0);const paid=r.filter(i=>i.status==='paid').reduce((s,i)=>s+parseFloat(i.total_amount||0),0);const pend2=tot-paid;
+    const w=window.open('','_blank');
+    w.document.write(`<!DOCTYPE html><html><head><title>${pn} Ledger</title><style>body{font-family:Arial,sans-serif;font-size:11px;margin:20px;color:#1a1f2e}table{width:100%;border-collapse:collapse;margin-top:14px}th{background:#0f2744;color:#fff;padding:7px 8px;text-align:left;font-size:10px}td{padding:6px 8px;border-bottom:1px solid #e8e3d8}tr:nth-child(even) td{background:#faf8f4}.sum{display:flex;gap:16px;margin:12px 0;padding:12px;background:#faf8f4;border-radius:8px}.si{flex:1}.sl{font-size:9px;color:#8a9ab0;text-transform:uppercase;font-weight:700}.sv{font-size:15px;font-weight:700;color:#0f2744}@media print{button{display:none}}</style></head><body><h1 style="color:#0f2744;font-size:18px;margin:0">Volo Yatra — Party Ledger</h1><h2 style="color:#d4951a;font-size:12px;margin:4px 0 16px">${pn}${pend?' — Pending Invoices Only':' — All Invoices'} · ${new Date().toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'})}</h2><div class="sum"><div class="si"><div class="sl">Total Invoiced</div><div class="sv">₹${tot.toLocaleString('en-IN')}</div></div><div class="si"><div class="sl">Received</div><div class="sv" style="color:#166534">₹${paid.toLocaleString('en-IN')}</div></div><div class="si"><div class="sl">Pending</div><div class="sv" style="color:#991b1b">₹${pend2.toLocaleString('en-IN')}</div></div><div class="si"><div class="sl">Invoices</div><div class="sv">${r.length}</div></div></div><table><thead><tr><th>Invoice No.</th><th>Date</th><th>Service</th><th>Route</th><th>PNR/Ref</th><th>Gross Fare</th><th>Taxable</th><th>GST</th><th>Total</th><th>Status</th></tr></thead><tbody>${r.map(i=>`<tr><td>${i.invoice_number}</td><td>${i.invoice_date?.slice(0,10)||'—'}</td><td style="text-transform:capitalize">${i.service_type||'—'}</td><td>${i.route_from||''}${i.route_to?' → '+i.route_to:''}</td><td>${i.pnr_ref||'—'}</td><td>₹${parseFloat(i.gross_fare||0).toLocaleString('en-IN')}</td><td>₹${parseFloat(i.taxable_amount||0).toLocaleString('en-IN')}</td><td>₹${(parseFloat(i.cgst_amount||0)+parseFloat(i.sgst_amount||0)).toLocaleString('en-IN')}</td><td style="font-weight:700">₹${parseFloat(i.total_amount||0).toLocaleString('en-IN')}</td><td>${i.status}</td></tr>`).join('')}</tbody></table><br><button onclick="window.print()" style="padding:8px 16px;background:#0f2744;color:#fff;border:none;border-radius:6px;cursor:pointer">🖨️ Print / Save PDF</button></body></html>`);w.document.close();
+  }
+}
+// JOURNAL ENTRY MULTI-LINE
+let jlc=0;
+function initJEL(){jlc=0;document.getElementById('jel').innerHTML='';addJEL();addJEL();}
+function addJEL(){jlc++;const id=jlc;const d=document.createElement('div');d.className='jl';d.id=`jl${id}`;d.innerHTML=`<input placeholder="Debit account" id="jda${id}" oninput="updJE()"><input type="number" placeholder="0" id="jma${id}" oninput="updJE()"><input placeholder="Credit account" id="jca${id}" oninput="updJE()"><input type="number" placeholder="0" id="jmc${id}" oninput="updJE()"><button class="jd" onclick="rmJEL(${id})">×</button>`;document.getElementById('jel').appendChild(d);}
+function rmJEL(id){document.getElementById(`jl${id}`)?.remove();updJE();}
+function updJE(){
+  let dr=0,cr=0;for(let i=1;i<=jlc;i++){dr+=parseFloat(document.getElementById(`jma${i}`)?.value)||0;cr+=parseFloat(document.getElementById(`jmc${i}`)?.value)||0;}
+  const diff=Math.abs(dr-cr);const f=v=>'₹'+v.toLocaleString('en-IN',{minimumFractionDigits:2});
+  document.getElementById('je-td').textContent=f(dr);document.getElementById('je-tc').textContent=f(cr);document.getElementById('je-df').textContent=f(diff);
+  const msg=document.getElementById('je-m'),btn=document.getElementById('jeBtn'),de=document.getElementById('je-df');
+  if(dr===0&&cr===0){msg.style.display='none';btn.disabled=true;de.style.color='var(--tx3)';}
+  else if(diff<0.01){msg.style.display='block';msg.style.background='var(--okb)';msg.style.color='var(--ok)';msg.textContent='✅ Entry balanced — ready to post';btn.disabled=false;de.style.color='var(--ok)';}
+  else{msg.style.display='block';msg.style.background='var(--erb)';msg.style.color='var(--er)';msg.textContent=`❌ Not balanced — difference ${f(diff)}. Debit must equal Credit.`;btn.disabled=true;de.style.color='var(--er)';}
+}
+async function saveJE(){
+  const lines=[];for(let i=1;i<=jlc;i++){const da=document.getElementById(`jda${i}`)?.value?.trim();const dm=parseFloat(document.getElementById(`jma${i}`)?.value)||0;const ca=document.getElementById(`jca${i}`)?.value?.trim();const cm=parseFloat(document.getElementById(`jmc${i}`)?.value)||0;if(da&&dm>0)lines.push({ledger_name:da,debit:dm,credit:0});if(ca&&cm>0)lines.push({ledger_name:ca,debit:0,credit:cm});}
+  const r=await api('POST','/api/accounting/journal-entries',{voucher_type:document.getElementById('je-v').value,entry_date:document.getElementById('je-d').value,narration:document.getElementById('je-n').value,lines});
+  if(r.success){toast(`${r.entry_number} posted ✓`,'ok');closeM('je');loadJE();}else toast(r.error||'Failed','er');
+}
+// BANKING
+let bkts=[],allLed=[],bkFil='pending',actT=null,selL='',selI=new Set();
+async function loadBankP(){await Promise.all([loadBAs(),loadWals(),loadBkT(),loadAllL()]);}
+async function loadBAs(){
+  const r=await api('GET','/api/bank/accounts');if(!Array.isArray(r))return;
+  const c=document.getElementById('bacc');
+  if(c)c.innerHTML=r.map(a=>`<div class="st ${a.account_type==='cash'?'ac':''}"><div class="slb">${a.account_name}</div><div class="svl">${fmt(a.current_balance)}</div><div class="ssb">${a.bank_name}${a.account_number?' · ****'+a.account_number.slice(-4):' · '+a.account_type}</div></div>`).join('')+`<div class="st" style="cursor:pointer;border:1px dashed var(--bd);background:transparent;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;color:var(--tx3);min-height:80px" onclick="openM('addba')"><div style="font-size:22px">+</div><div style="font-size:12px">Add Account</div></div>`;
+  const up=document.getElementById('upbi');if(up)up.innerHTML='<option value="">Select account</option>'+r.map(a=>`<option value="${a.id}">${a.account_name} (${a.bank_name})</option>`).join('');
+  const af=document.getElementById('bkaf');if(af)af.innerHTML='<option value="">All Accounts</option>'+r.map(a=>`<option value="${a.id}">${a.account_name}</option>`).join('');
+  const ul=document.getElementById('upbl');if(ul)ul.innerHTML=r.map(a=>`<option value="${a.ledger_name}">${a.ledger_name}</option>`).join('')+'<option value="Cash in Hand">Cash in Hand</option>';
+}
+async function loadWals(){
+  const r=await api('GET','/api/wallets');const wr=document.getElementById('walr');
+  if(!wr)return;
+  if(!Array.isArray(r)||!r.length){wr.innerHTML='<div style="padding:14px;text-align:center;color:var(--tx3)">No wallets configured</div>';return;}
+  wr.innerHTML=r.map(w=>`<div class="wr"><div><div style="font-weight:600;font-size:13px">${w.portal_name}</div><div style="font-size:11px;color:var(--tx3)">Ledger: ${w.ledger_name} · Updated: ${w.last_updated?new Date(w.last_updated).toLocaleDateString('en-IN'):'—'}</div></div><div style="display:flex;align-items:center;gap:10px"><input type="number" value="${w.balance}" id="wb${w.id}" style="width:100px;padding:5px 8px;border:1px solid var(--bd);border-radius:6px;font-size:13px;font-family:'DM Sans',sans-serif;outline:none;text-align:right"><button class="btn btns btnp" onclick="updWal(${w.id})">Update</button><span style="font-size:14px;font-weight:700;color:var(--nv);min-width:70px;text-align:right">${fmt(w.balance)}</span></div></div>`).join('');
+}
+async function updWal(id){const b=parseFloat(document.getElementById(`wb${id}`)?.value)||0;const r=await api('PUT',`/api/wallets/${id}`,{balance:b});if(r.success){toast('Wallet updated ✓','ok');loadWals();}else toast(r.error||'Failed','er');}
+async function loadAllL(){const r=await api('GET','/api/accounting/ledgers');allLed=Array.isArray(r)?r:[];const sel=document.getElementById('bl');if(sel){sel.innerHTML='<option value="">— Apply ledger to all selected —</option>';const g={};allLed.forEach(l=>{if(!g[l.ledger_group])g[l.ledger_group]=[];g[l.ledger_group].push(l.name);});Object.keys(g).sort().forEach(gn=>{const og=document.createElement('optgroup');og.label=gn;g[gn].forEach(n=>{const o=document.createElement('option');o.value=n;o.textContent=n;og.appendChild(o);});sel.appendChild(og);});}}
+async function loadBkT(){const af=document.getElementById('bkaf')?.value||'';const r=await api('GET',`/api/bank/transactions?status=${bkFil}&bank_account_id=${af}`);bkts=Array.isArray(r)?r:[];renderBkT();}
+function bkF(f){bkFil=f;['bfp','bfpo','bfa'].forEach(id=>{const e=document.getElementById(id);if(e){e.style.background='';e.style.color='';e.style.fontWeight='';e.style.borderColor='';}});const map={pending:'bfp',posted:'bfpo',all:'bfa'};const e=document.getElementById(map[f]);if(e){e.style.background='var(--nv)';e.style.color='#fff';e.style.fontWeight='600';}loadBkT();}
+function renderBkT(){
+  const s=(document.getElementById('bks2')?.value||'').toLowerCase();const tb=document.getElementById('bkb');
+  let data=bkts.filter(t=>!s||t.description.toLowerCase().includes(s)||(t.suggested_ledger||'').toLowerCase().includes(s));
+  document.getElementById('bkttl').textContent=`Transactions — ${bkFil==='pending'?'Pending':bkFil==='posted'?'Posted':'All'} (${data.length})`;
+  if(!data.length){tb.innerHTML=`<tr><td colspan="9" style="text-align:center;color:var(--tx3);padding:24px">${bkFil==='pending'?'No pending transactions. Upload a bank statement above.':'No transactions found.'}</td></tr>`;return;}
+  tb.innerHTML=data.map(t=>{
+    const isCr=parseFloat(t.credit_amount)>0;const isP=t.status==='pending';const isPo=t.status==='posted';
+    const dt=t.txn_date?new Date(t.txn_date).toLocaleDateString('en-IN',{day:'numeric',month:'short'}):'—';
+    const dr=parseFloat(t.debit_amount)>0?`<span style="color:var(--er);font-weight:600">${fmt(t.debit_amount)}</span>`:'<span style="color:var(--tx3)">—</span>';
+    const cr=parseFloat(t.credit_amount)>0?`<span style="color:var(--ok);font-weight:600">${fmt(t.credit_amount)}</span>`:'<span style="color:var(--tx3)">—</span>';
+    const led=isPo?`<span style="font-size:11px;color:var(--ok);font-weight:600">✓ ${t.suggested_ledger||'—'}</span>`:`<span style="font-size:11px;color:${t.suggested_ledger?'var(--nv3)':'var(--tx3)'};cursor:pointer" onclick="openLM(${t.id})">${t.suggested_ledger||'+ Select ledger'}</span>`;
+    const badge=isPo?'<span class="pill ps">Posted</span>':t.status==='ignored'?'<span class="pill pg2">Ignored</span>':'<span class="pill pw">Pending</span>';
+    const acts=isP?`<div style="display:flex;gap:4px"><button class="btn btns btnp" onclick="openLM(${t.id})">Post</button><button class="btn btns" onclick="ignT(${t.id})">🚫</button></div>`:isPo?'<span style="font-size:11px;color:var(--tx3)">✓</span>':'';
+    const chk=isP?`<input type="checkbox" class="tc" data-id="${t.id}" onchange="togTS(${t.id},this.checked)" ${selI.has(t.id)?'checked':''}>`:''
+    return `<tr style="${isPo?'opacity:0.6':''}"><td>${chk}</td><td style="font-size:12px;white-space:nowrap">${dt}</td><td style="font-size:12px;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${t.description}">${t.description}</td><td style="text-align:right">${dr}</td><td style="text-align:right">${cr}</td><td style="text-align:right;font-size:12px;color:var(--tx3)">${t.balance>0?fmt(t.balance):'—'}</td><td>${led}</td><td>${badge}</td><td>${acts}</td></tr>`;
+  }).join('');
+}
+function showUpP(){document.getElementById('upan').style.display='block';}
+function hideUpP(){document.getElementById('upan').style.display='none';}
+function handleDrop(e){e.preventDefault();document.getElementById('dz').style.borderColor='';const f=e.dataTransfer.files[0];if(f)uplPDF(f);}
+function handleFS(inp){const f=inp.files[0];if(f)uplPDF(f);}
+async function uplPDF(file){
+  if(!file.name.toLowerCase().endsWith('.pdf')){toast('Please select a PDF file','er');return;}
+  document.getElementById('uppr').style.display='block';document.getElementById('uprs').style.display='none';
+  const fd=new FormData();fd.append('statement',file);fd.append('bank_account_id',document.getElementById('upbi')?.value||'');
+  try{const res=await fetch('/api/bank/upload',{method:'POST',credentials:'include',body:fd});const data=await res.json();document.getElementById('uppr').style.display='none';const rd=document.getElementById('uprs');rd.style.display='block';if(data.success){rd.innerHTML=`<div style="background:var(--okb);color:var(--ok);padding:11px 14px;border-radius:8px;font-size:13px;font-weight:600">✅ Extracted ${data.parsed} transactions · ${data.saved} saved. Select ledgers below.</div>`;toast(`${data.saved} transactions extracted ✓`,'ok');bkts=data.transactions||[];bkFil='pending';renderBkT();}else rd.innerHTML=`<div style="background:var(--erb);color:var(--er);padding:11px 14px;border-radius:8px;font-size:13px">${data.error}</div>`;}
+  catch(e){document.getElementById('uppr').style.display='none';toast('Upload failed: '+e.message,'er');}
+}
+function openLM(id){
+  actT=id;selL='';const txn=bkts.find(t=>t.id===id);if(!txn)return;
+  const isCr=parseFloat(txn.credit_amount)>0;const amt=isCr?parseFloat(txn.credit_amount):parseFloat(txn.debit_amount);
+  const dt=txn.txn_date?new Date(txn.txn_date).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}):'—';
+  const bl=document.getElementById('upbl')?.value||'HDFC Bank A/c';
+  document.getElementById('ledmd').innerHTML=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px"><div><span style="font-size:10px;color:var(--tx3)">DATE</span><br><strong>${dt}</strong></div><div><span style="font-size:10px;color:var(--tx3)">AMOUNT</span><br><strong style="color:${isCr?'var(--ok)':'var(--er)'}">${isCr?'+':'-'}${fmt(amt)}</strong></div></div><div><span style="font-size:10px;color:var(--tx3)">DESCRIPTION</span><br><strong>${txn.description}</strong></div>${txn.suggested_ledger?`<div style="margin-top:6px;font-size:12px;color:var(--nv3)">💡 Suggested: <strong>${txn.suggested_ledger}</strong></div>`:''}<div style="margin-top:7px;font-size:11px;color:var(--tx3)">${isCr?`Dr ${bl} → Cr [Ledger]`:`Dr [Ledger] → Cr ${bl}`}</div>`;
+  const init=txn.suggested_ledger||'';document.getElementById('ledsrch').value=init;document.getElementById('ledn').value='';document.getElementById('ledb').style.display='none';document.getElementById('postbtn').disabled=!init;
+  if(init){selL=init;document.getElementById('ledb').style.display='block';document.getElementById('ledb').textContent='✓ Ledger: '+init;}
+  filterLed(init);document.getElementById('ledm').classList.add('open');setTimeout(()=>document.getElementById('ledsrch').focus(),100);
+}
+function filterLed(q){const list=document.getElementById('ledl');const flt=allLed.filter(l=>!q||l.name.toLowerCase().includes(q.toLowerCase())).slice(0,40);const g={};flt.forEach(l=>{if(!g[l.ledger_group])g[l.ledger_group]=[];g[l.ledger_group].push(l.name);});list.innerHTML=!flt.length?'<div style="padding:12px;color:var(--tx3);font-size:13px">No matching ledgers</div>':Object.keys(g).sort().map(gn=>`<div class="lg">${gn}</div>${g[gn].map(n=>`<div class="lo${selL===n?' sel':''}" onclick="pickL('${n.replace(/'/g,"\\'")}')">  ${n}</div>`).join('')}`).join('');}
+function pickL(n){selL=n;document.getElementById('ledsrch').value=n;document.getElementById('ledb').style.display='block';document.getElementById('ledb').textContent='✓ Selected: '+n;document.getElementById('postbtn').disabled=false;filterLed(n);}
+function closeLedM(){document.getElementById('ledm').classList.remove('open');actT=null;selL='';}
+async function confirmPost(){
+  if(!selL||!actT){toast('Select a ledger first','er');return;}
+  const btn=document.getElementById('postbtn');btn.innerHTML='<span class="spn"></span>';btn.disabled=true;
+  const r=await api('POST',`/api/bank/transactions/${actT}/post`,{ledger_name:selL,narration:document.getElementById('ledn').value,bank_ledger:document.getElementById('upbl')?.value||'HDFC Bank A/c'});
+  btn.innerHTML='✅ Post to Ledger';btn.disabled=false;
+  if(r.success){toast(`Posted to ${selL} — ${r.entry_number} ✓`,'ok');closeLedM();const t=bkts.find(x=>x.id===actT);if(t){t.status='posted';t.suggested_ledger=selL;}renderBkT();}else toast(r.error||'Failed','er');
+}
+async function ignT(id){const r=await api('POST',`/api/bank/transactions/${id}/ignore`,{});if(r.success){const t=bkts.find(x=>x.id===id);if(t)t.status='ignored';renderBkT();}}
+function togSA(chk){document.querySelectorAll('.tc').forEach(c=>{c.checked=chk.checked;togTS(parseInt(c.dataset.id),chk.checked);});}
+function togTS(id,checked){if(checked)selI.add(id);else selI.delete(id);const bar=document.getElementById('bb');if(selI.size>0){bar.style.display='flex';document.getElementById('bc').textContent=selI.size+' selected';}else bar.style.display='none';}
+function clrS(){selI.clear();document.querySelectorAll('.tc').forEach(c=>c.checked=false);const chk=document.getElementById('sa');if(chk)chk.checked=false;document.getElementById('bb').style.display='none';}
+async function postAllS(){const led=document.getElementById('bl').value;if(!led){toast('Select a ledger first','er');return;}if(!selI.size){toast('No transactions selected','er');return;}const bl=document.getElementById('upbl')?.value||'HDFC Bank A/c';let posted=0,errs=0;for(const id of selI){const r=await api('POST',`/api/bank/transactions/${id}/post`,{ledger_name:led,bank_ledger:bl});if(r.success){posted++;const t=bkts.find(x=>x.id===id);if(t){t.status='posted';t.suggested_ledger=led;}}else errs++;}toast(`${posted} posted to ${led}${errs?' ('+errs+' errors)':''}✓`,'ok');clrS();renderBkT();}
+async function saveBA(){const r=await api('POST','/api/bank/accounts',{account_name:document.getElementById('ba-n').value,bank_name:document.getElementById('ba-b').value,account_number:document.getElementById('ba-ac').value,ifsc_code:document.getElementById('ba-if').value,account_type:document.getElementById('ba-t').value,opening_balance:parseFloat(document.getElementById('ba-ob').value)||0});if(r.success){toast(`${r.account.account_name} added ✓ Ledger auto-created`,'ok');closeM('addba');loadBAs();}else toast(r.error||'Failed','er');}
+// CRM
+async function loadCRM(){
+  const r=await api('GET','/api/leads');if(!Array.isArray(r))return;
+  const stgs=['new','contacted','proposal_sent','negotiating','converted'];const slbl={new:'New',contacted:'Contacted',proposal_sent:'Proposal Sent',negotiating:'Negotiating',converted:'Converted'};const srcE={instagram:'📸',facebook:'📘',whatsapp:'💬',website:'🌐',walkin:'🚶',referral:'👋'};
+  const grp={};stgs.forEach(s=>grp[s]=[]);r.forEach(l=>{if(grp[l.pipeline_stage])grp[l.pipeline_stage].push(l);});
+  document.getElementById('cr-t').textContent=r.length;document.getElementById('cr-n').textContent=grp['new'].length;document.getElementById('cr-c').textContent=grp['converted'].length;document.getElementById('cr-v').textContent=fmt(r.reduce((s,l)=>s+parseFloat(l.estimated_value||0),0));
+  document.getElementById('crmpp').innerHTML=stgs.map(s=>`<div class="pc"><div class="ph">${slbl[s]} <span style="background:rgba(255,255,255,.5);border-radius:10px;padding:1px 6px;font-size:10px">${grp[s].length}</span></div>${grp[s].map(l=>`<div class="lc"><div class="lc-n">${l.name}</div><div class="lc-s">${l.destination||l.service_interest||'—'}</div><div style="display:inline-flex;align-items:center;gap:3px;font-size:10px;padding:2px 6px;border-radius:4px;background:var(--cr2);color:var(--tx3);margin-top:4px">${srcE[l.source]||'•'} ${l.source||'—'}</div><div class="lc-v">${fmt(l.estimated_value||0)}</div></div>`).join('')}</div>`).join('');
+}
+async function saveLead(){const btn=document.getElementById('alBtn');btn.innerHTML='<span class="spn"></span>';btn.disabled=true;const r=await api('POST','/api/leads',{name:document.getElementById('al-n').value,phone:document.getElementById('al-p').value,source:document.getElementById('al-s').value,service_interest:document.getElementById('al-sv').value,destination:document.getElementById('al-d').value,estimated_value:parseFloat(document.getElementById('al-v').value)||0,travel_date:document.getElementById('al-dt').value||null,passengers:parseInt(document.getElementById('al-px').value)||1,notes:document.getElementById('al-no').value});btn.innerHTML='Save Lead';btn.disabled=false;if(r.success){toast('Lead saved ✓','ok');closeM('lead');loadCRM();}else toast(r.error||'Failed','er');}
+// MARKETING
+async function loadCamp(){const r=await api('GET','/api/campaigns');const tb=document.querySelector('#campt tbody');if(!Array.isArray(r)||!r.length){tb.innerHTML='<tr><td colspan="8" style="text-align:center;color:var(--tx3);padding:20px">No campaigns yet</td></tr>';return;}const e={instagram:'📸',facebook:'📘',whatsapp:'💬',email:'📧'};tb.innerHTML=r.map(c=>{const roi=c.budget>0?Math.round((c.revenue_generated/c.budget-1)*100):0;return`<tr><td style="font-weight:500">${c.name}</td><td>${e[c.channel]||'•'} ${c.channel}</td><td>${(c.reach||0).toLocaleString('en-IN')}</td><td>${c.enquiries||0}</td><td>${c.conversions||0}</td><td>${fmt(c.revenue_generated)}</td><td class="${roi>0?'cr':''}">${roi>0?'+':''}${roi}%</td><td><span class="pill ${c.status==='active'?'ps':'pw'}">${c.status}</span></td></tr>`;}).join('');}
+async function saveCamp(){const r=await api('POST','/api/campaigns',{name:document.getElementById('nc-n').value,channel:document.getElementById('nc-c').value,budget:parseFloat(document.getElementById('nc-b').value)||0,start_date:document.getElementById('nc-s').value,end_date:document.getElementById('nc-e').value});if(r.success){toast('Campaign created ✓','ok');closeM('camp');loadCamp();}else toast(r.error||'Failed','er');}
+// ANALYTICS
+async function loadAnl(){
+  const [rr,dr]=await Promise.all([api('GET','/api/analytics/revenue'),api('GET','/api/analytics/destinations')]);
+  const ch=document.getElementById('an-ch'),dd=document.getElementById('an-de');
+  if(Array.isArray(rr)&&rr.length){const tot=rr.reduce((s,x)=>s+parseFloat(x.revenue),0);const tbk=rr.reduce((s,x)=>s+parseInt(x.count),0);document.getElementById('an-r').textContent=fmt(tot);document.getElementById('an-b').textContent=tbk;document.getElementById('an-a').textContent=tbk>0?fmt(tot/tbk):'₹0';const mx=Math.max(...rr.map(x=>parseFloat(x.revenue)));ch.innerHTML=`<div style="display:flex;align-items:flex-end;gap:4px;height:80px">${rr.map((x,i)=>`<div style="flex:1;border-radius:3px 3px 0 0;background:${i===rr.length-1?'var(--gd)':'var(--nv3)'};opacity:${i===rr.length-1?1:0.6};height:${Math.max(6,Math.round(parseFloat(x.revenue)/mx*100))}%;min-width:8px" title="${x.month}: ${fmt(x.revenue)}"></div>`).join('')}</div><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--tx3);margin-top:6px">${rr.map(x=>`<span>${x.month.split(' ')[0]}</span>`).join('')}</div>`;}
+  else ch.innerHTML='<div style="text-align:center;color:var(--tx3);padding:20px">No data yet</div>';
+  if(Array.isArray(dr)&&dr.length){const mx=Math.max(...dr.map(x=>parseInt(x.count)));dd.innerHTML=dr.map(x=>`<div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px"><span style="font-weight:500">${x.destination}</span><span style="color:var(--tx3)">${x.count} bookings</span></div><div class="prog"><div class="pf" style="width:${Math.round(x.count/mx*100)}%;background:var(--nv3)"></div></div></div>`).join('');}
+  else dd.innerHTML='<div style="text-align:center;color:var(--tx3);padding:20px">No data yet</div>';
+}
+// SETTINGS
+function loadSet(){loadUsers();loadGSTCfg();loadAudit();}
+function stTab(el,id){document.querySelectorAll('#p-set .tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');['st-u','st-c','st-g','st-a'].forEach(s=>{const e=document.getElementById(s);if(e)e.style.display='none';});document.getElementById(id).style.display='block';}
+async function loadUsers(){const r=await api('GET','/api/users');const tb=document.querySelector('#usrt tbody');if(!Array.isArray(r)){tb.innerHTML='<tr><td colspan="7" style="text-align:center;color:var(--er);padding:20px">Admin access required</td></tr>';return;}if(!r.length){tb.innerHTML='<tr><td colspan="7" style="text-align:center;color:var(--tx3);padding:20px">No users</td></tr>';return;}tb.innerHTML=r.map(u=>`<tr><td style="font-weight:600">${u.name}</td><td style="font-size:12px">${u.email}</td><td><span class="pill ${u.role==='admin'?'pi':'pg2'}">${u.role}</span></td><td style="font-size:11px;color:var(--tx3)">${u.permissions||'—'}</td><td style="font-size:12px">${u.access_until?new Date(u.access_until).toLocaleDateString('en-IN'):'Unlimited'}</td><td><span class="pill ${u.is_active?'ps':'pd'}">${u.is_active?'Active':'Inactive'}</span></td><td><button class="btn btns btnp" onclick='openEditU(${JSON.stringify(u)})'>✏️ Edit</button></td></tr>`).join('');}
+function openAddU(){document.getElementById('umt').textContent='Add User';document.getElementById('uf-i').value='';document.getElementById('uf-n').value='';document.getElementById('uf-e').value='';document.getElementById('uf-pw').value='';document.getElementById('uf-r').value='staff';document.getElementById('uf-pe').value='bookings,crm';document.getElementById('uf-u').value='';document.getElementById('uf-a').value='true';document.getElementById('uf-pn').style.display='none';document.getElementById('ufBtn').textContent='Create User';openM('usr');}
+function openEditU(u){document.getElementById('umt').textContent='Edit User';document.getElementById('uf-i').value=u.id;document.getElementById('uf-n').value=u.name||'';document.getElementById('uf-e').value=u.email||'';document.getElementById('uf-pw').value='';document.getElementById('uf-r').value=u.role||'staff';document.getElementById('uf-pe').value=u.permissions||'';document.getElementById('uf-u').value=u.access_until?u.access_until.slice(0,10):'';document.getElementById('uf-a').value=u.is_active?'true':'false';document.getElementById('uf-pn').style.display='inline';document.getElementById('ufBtn').textContent='Update User';openM('usr');}
+async function saveUser(){const btn=document.getElementById('ufBtn');btn.innerHTML='<span class="spn"></span>';btn.disabled=true;const id=document.getElementById('uf-i').value;const isE=!!id;const r=await api(isE?'PUT':'POST',isE?`/api/users/${id}`:'/api/users',{name:document.getElementById('uf-n').value,email:document.getElementById('uf-e').value,password:document.getElementById('uf-pw').value,role:document.getElementById('uf-r').value,permissions:document.getElementById('uf-pe').value,access_until:document.getElementById('uf-u').value||null,is_active:document.getElementById('uf-a').value==='true'});btn.innerHTML=isE?'Update User':'Create User';btn.disabled=false;if(r.success){toast(isE?'User updated ✓':'User created ✓','ok');closeM('usr');loadUsers();}else toast(r.error||'Failed','er');}
+async function loadGSTCfg(){const r=await api('GET','/api/settings/gst');const tb=document.querySelector('#gstc tbody');if(!Array.isArray(r))return;tb.innerHTML=r.map(g=>`<tr><td style="font-weight:500;text-transform:capitalize">${g.service_type}</td><td>${g.hsn_sac}</td><td><span class="pill ${g.is_applicable?'ps':'pg2'}">${g.is_applicable?'Yes':'Exempt'}</span></td><td>${g.cgst_rate}%</td><td>${g.sgst_rate}%</td><td>${g.igst_rate}%</td><td style="font-size:11px;color:var(--tx3)">${g.basis||'—'}</td></tr>`).join('');}
+async function loadAudit(){const r=await api('GET','/api/audit-log');const tb=document.querySelector('#audt tbody');if(!Array.isArray(r)||!r.length){tb.innerHTML='<tr><td colspan="5" style="text-align:center;color:var(--tx3);padding:16px">No audit entries yet</td></tr>';return;}tb.innerHTML=r.slice(0,50).map(a=>`<tr><td style="font-size:11px">${new Date(a.created_at).toLocaleString('en-IN',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})}</td><td>${a.user_name||'—'}</td><td style="font-size:12px">${a.action||'—'}</td><td><span class="pill pg2" style="font-size:10px">${a.module||'—'}</span></td><td style="font-size:11px;color:var(--tx3)">${a.record_ref||'—'}</td></tr>`).join('');}
+async function saveCo(){const r=await api('PUT','/api/settings/company',{company_name:document.getElementById('co-n').value,gstin:document.getElementById('co-g').value,pan:document.getElementById('co-p').value,state_code:document.getElementById('co-s').value,phone:document.getElementById('co-ph').value,email:document.getElementById('co-e').value,address:document.getElementById('co-a').value,bank_name:document.getElementById('co-bn').value,bank_account:document.getElementById('co-ba').value});if(r.success)toast('Saved ✓','ok');else toast(r.error||'Failed','er');}
+function dlTpl(t){const a=document.createElement('a');a.href=`/api/templates/${t}`;a.download=`VY_${t}_template.csv`;a.click();toast('Downloading...','');}
+// BOOT
+checkAuth();
+</script>
+</body>
+</html>
